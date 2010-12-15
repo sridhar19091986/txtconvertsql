@@ -7,3 +7,14 @@ F:\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer 3 Conversion.csproj.Gen
 F:\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer 3 Conversion.exe
 F:\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer 3 Conversion.pdb
 F:\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer 3 Conversion.csproj.ResolveComReference.cache
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer 3 Conversion.csproj.ResolveComReference.cache
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer 3 Conversion.exe
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer 3 Conversion.pdb
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\bin\Debug\Layer 3 Conversion.exe
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\bin\Debug\Layer 3 Conversion.pdb
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\ResolveAssemblyReference.cache
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer_3_Conversion.frmLAYER.resources
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\Layer_3_Conversion.Properties.Resources.resources
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\GenerateResource-ResGen.read.1.tlog
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\GenerateResource-ResGen.read.4.tlog
+G:\txtconvertsql\Layer 3 Conversion\Layer 3 Conversion\obj\Debug\GenerateResource-ResGen.write.1.tlog
