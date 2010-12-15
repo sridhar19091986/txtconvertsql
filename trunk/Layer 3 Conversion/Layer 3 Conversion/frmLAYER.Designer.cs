@@ -52,27 +52,27 @@
             this.tvFilterOut = new System.Windows.Forms.TreeView();
             this.lbFilterIn = new System.Windows.Forms.ListBox();
             this.信令分析 = new System.Windows.Forms.TabPage();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.btnSaveScript = new System.Windows.Forms.Button();
+            this.btnRunScript = new System.Windows.Forms.Button();
+            this.rtxtSql = new System.Windows.Forms.RichTextBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tvSql = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPara = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rtxtSql = new System.Windows.Forms.RichTextBox();
+            this.rtxtEvent = new System.Windows.Forms.RichTextBox();
             this.ttipLayer = new System.Windows.Forms.ToolStrip();
             this.ttipLayerbtnOpen = new System.Windows.Forms.ToolStripButton();
             this.ttipLayerClearDB = new System.Windows.Forms.ToolStripButton();
             this.ttipLayerFilter = new System.Windows.Forms.ToolStripButton();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.ttipLayerGetXml = new System.Windows.Forms.ToolStripButton();
             this.ttipLayerWriteXml = new System.Windows.Forms.ToolStripButton();
             this.ttipLayerExit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.rtxtEvent = new System.Windows.Forms.RichTextBox();
-            this.btnRunScript = new System.Windows.Forms.Button();
-            this.btnSaveScript = new System.Windows.Forms.Button();
             this.mstipLayer.SuspendLayout();
             this.sstipLayer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -87,6 +87,12 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.信令分析.SuspendLayout();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
@@ -94,12 +100,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPara)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             this.ttipLayer.SuspendLayout();
-            this.splitContainer4.Panel1.SuspendLayout();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
-            this.splitContainer5.Panel1.SuspendLayout();
-            this.splitContainer5.Panel2.SuspendLayout();
-            this.splitContainer5.SuspendLayout();
             this.SuspendLayout();
             // 
             // mstipLayer
@@ -322,6 +322,72 @@
             this.信令分析.Text = "信令分析";
             this.信令分析.UseVisualStyleBackColor = true;
             // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.splitContainer5);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.splitContainer3);
+            this.splitContainer4.Size = new System.Drawing.Size(702, 334);
+            this.splitContainer4.SplitterDistance = 76;
+            this.splitContainer4.TabIndex = 1;
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.btnSaveScript);
+            this.splitContainer5.Panel1.Controls.Add(this.btnRunScript);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.rtxtSql);
+            this.splitContainer5.Size = new System.Drawing.Size(702, 76);
+            this.splitContainer5.SplitterDistance = 235;
+            this.splitContainer5.TabIndex = 2;
+            // 
+            // btnSaveScript
+            // 
+            this.btnSaveScript.Location = new System.Drawing.Point(64, 43);
+            this.btnSaveScript.Name = "btnSaveScript";
+            this.btnSaveScript.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveScript.TabIndex = 1;
+            this.btnSaveScript.Text = "SaveScript";
+            this.btnSaveScript.UseVisualStyleBackColor = true;
+            // 
+            // btnRunScript
+            // 
+            this.btnRunScript.Location = new System.Drawing.Point(64, 13);
+            this.btnRunScript.Name = "btnRunScript";
+            this.btnRunScript.Size = new System.Drawing.Size(75, 23);
+            this.btnRunScript.TabIndex = 0;
+            this.btnRunScript.Text = "RunScript";
+            this.btnRunScript.UseVisualStyleBackColor = true;
+            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
+            // 
+            // rtxtSql
+            // 
+            this.rtxtSql.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtSql.Location = new System.Drawing.Point(0, 0);
+            this.rtxtSql.Name = "rtxtSql";
+            this.rtxtSql.Size = new System.Drawing.Size(461, 74);
+            this.rtxtSql.TabIndex = 1;
+            this.rtxtSql.Text = "";
+            this.rtxtSql.TextChanged += new System.EventHandler(this.rtxtSql_TextChanged);
+            // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -389,15 +455,14 @@
             this.excelToolStripMenuItem.Text = "Excel";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
-            // rtxtSql
+            // rtxtEvent
             // 
-            this.rtxtSql.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtSql.Location = new System.Drawing.Point(0, 0);
-            this.rtxtSql.Name = "rtxtSql";
-            this.rtxtSql.Size = new System.Drawing.Size(461, 74);
-            this.rtxtSql.TabIndex = 1;
-            this.rtxtSql.Text = "";
-            this.rtxtSql.TextChanged += new System.EventHandler(this.rtxtSql_TextChanged);
+            this.rtxtEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtEvent.Location = new System.Drawing.Point(3, 204);
+            this.rtxtEvent.Name = "rtxtEvent";
+            this.rtxtEvent.Size = new System.Drawing.Size(458, 47);
+            this.rtxtEvent.TabIndex = 1;
+            this.rtxtEvent.Text = "";
             // 
             // ttipLayer
             // 
@@ -446,6 +511,11 @@
             this.ttipLayerFilter.Text = "Filter";
             this.ttipLayerFilter.Click += new System.EventHandler(this.ttipLayerFilter_Click);
             // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 19);
+            // 
             // ttipLayerGetXml
             // 
             this.ttipLayerGetXml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -476,82 +546,12 @@
             this.ttipLayerExit.Text = "Exit";
             this.ttipLayerExit.Click += new System.EventHandler(this.ttipLayerExit_Click);
             // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 19);
-            // 
             // toolStripComboBox1
             // 
             this.toolStripComboBox1.Name = "toolStripComboBox1";
             this.toolStripComboBox1.Size = new System.Drawing.Size(221, 22);
             this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             this.toolStripComboBox1.Click += new System.EventHandler(this.toolStripComboBox1_Click);
-            // 
-            // splitContainer4
-            // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this.splitContainer5);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer4.Size = new System.Drawing.Size(702, 334);
-            this.splitContainer4.SplitterDistance = 76;
-            this.splitContainer4.TabIndex = 1;
-            // 
-            // splitContainer5
-            // 
-            this.splitContainer5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer5.Name = "splitContainer5";
-            // 
-            // splitContainer5.Panel1
-            // 
-            this.splitContainer5.Panel1.Controls.Add(this.btnSaveScript);
-            this.splitContainer5.Panel1.Controls.Add(this.btnRunScript);
-            // 
-            // splitContainer5.Panel2
-            // 
-            this.splitContainer5.Panel2.Controls.Add(this.rtxtSql);
-            this.splitContainer5.Size = new System.Drawing.Size(702, 76);
-            this.splitContainer5.SplitterDistance = 235;
-            this.splitContainer5.TabIndex = 2;
-            // 
-            // rtxtEvent
-            // 
-            this.rtxtEvent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtEvent.Location = new System.Drawing.Point(3, 204);
-            this.rtxtEvent.Name = "rtxtEvent";
-            this.rtxtEvent.Size = new System.Drawing.Size(458, 47);
-            this.rtxtEvent.TabIndex = 1;
-            this.rtxtEvent.Text = "";
-            // 
-            // btnRunScript
-            // 
-            this.btnRunScript.Location = new System.Drawing.Point(64, 13);
-            this.btnRunScript.Name = "btnRunScript";
-            this.btnRunScript.Size = new System.Drawing.Size(75, 23);
-            this.btnRunScript.TabIndex = 0;
-            this.btnRunScript.Text = "RunScript";
-            this.btnRunScript.UseVisualStyleBackColor = true;
-            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
-            // 
-            // btnSaveScript
-            // 
-            this.btnSaveScript.Location = new System.Drawing.Point(64, 43);
-            this.btnSaveScript.Name = "btnSaveScript";
-            this.btnSaveScript.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveScript.TabIndex = 1;
-            this.btnSaveScript.Text = "SaveScript";
-            this.btnSaveScript.UseVisualStyleBackColor = true;
             // 
             // frmLAYER
             // 
@@ -583,6 +583,12 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);
             this.信令分析.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            this.splitContainer4.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            this.splitContainer5.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.ResumeLayout(false);
@@ -591,12 +597,6 @@
             this.contextMenuStrip2.ResumeLayout(false);
             this.ttipLayer.ResumeLayout(false);
             this.ttipLayer.PerformLayout();
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            this.splitContainer4.ResumeLayout(false);
-            this.splitContainer5.Panel1.ResumeLayout(false);
-            this.splitContainer5.Panel2.ResumeLayout(false);
-            this.splitContainer5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
