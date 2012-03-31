@@ -245,7 +245,7 @@ namespace LayerSQL
                 strConn += CON_strConnTimeOut;
                 //base.m_oConn = new SqlConnection(strConn);
                 //base.m_oConn = new SqlConnection("server=localhost;uid=sa;pwd=1;database=" + strDataBase);
-                strConn = "Server=(local);Integrated Security=SSPI;database=" + strDataBase;
+                strConn = "Server=localhost;Integrated Security=SSPI;database=" + strDataBase;
                 base.m_oConn = new SqlConnection(strConn);
             }
 
