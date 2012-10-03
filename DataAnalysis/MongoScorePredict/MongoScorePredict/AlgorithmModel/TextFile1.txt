@@ -1,0 +1,307 @@
+﻿if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('数据模型') and o.name = 'FK_数据模型_REFERENCE_历史数据更新')
+alter table 数据模型
+   drop constraint FK_数据模型_REFERENCE_历史数据更新
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('概率模型') and o.name = 'FK_概率模型_REFERENCE_数据模型')
+alter table 概率模型
+   drop constraint FK_概率模型_REFERENCE_数据模型
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('训练模型排列') and o.name = 'FK_训练模型排列_REFERENCE_概率模型')
+alter table 训练模型排列
+   drop constraint FK_训练模型排列_REFERENCE_概率模型
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('训练模型排列') and o.name = 'FK_训练模型排列_REFERENCE_走势模型')
+alter table 训练模型排列
+   drop constraint FK_训练模型排列_REFERENCE_走势模型
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('训练模型排列') and o.name = 'FK_训练模型排列_REFERENCE_即时数据更新')
+alter table 训练模型排列
+   drop constraint FK_训练模型排列_REFERENCE_即时数据更新
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('训练模型排列') and o.name = 'FK_训练模型排列_REFERENCE_预测模型')
+alter table 训练模型排列
+   drop constraint FK_训练模型排列_REFERENCE_预测模型
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('走势模型') and o.name = 'FK_走势模型_REFERENCE_历史数据更新')
+alter table 走势模型
+   drop constraint FK_走势模型_REFERENCE_历史数据更新
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('预测模型') and o.name = 'FK_预测模型_REFERENCE_历史数据更新')
+alter table 预测模型
+   drop constraint FK_预测模型_REFERENCE_历史数据更新
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('预测模型') and o.name = 'FK_预测模型_REFERENCE_即时数据更新')
+alter table 预测模型
+   drop constraint FK_预测模型_REFERENCE_即时数据更新
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('即时数据更新')
+            and   type = 'U')
+   drop table 即时数据更新
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('历史数据更新')
+            and   type = 'U')
+   drop table 历史数据更新
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('数据模型')
+            and   type = 'U')
+   drop table 数据模型
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('概率模型')
+            and   type = 'U')
+   drop table 概率模型
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('训练模型排列')
+            and   type = 'U')
+   drop table 训练模型排列
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('误差检查模型')
+            and   type = 'U')
+   drop table 误差检查模型
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('误差检测')
+            and   type = 'U')
+   drop table 误差检测
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('走势模型')
+            and   type = 'U')
+   drop table 走势模型
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('预测模型')
+            and   type = 'U')
+   drop table 预测模型
+go
+
+/*==============================================================*/
+/* Table: 即时数据更新                                                */
+/*==============================================================*/
+create table 即时数据更新 (
+   
+)
+go
+
+/*==============================================================*/
+/* Table: 历史数据更新                                                */
+/*==============================================================*/
+create table 历史数据更新 (
+   
+)
+go
+
+/*==============================================================*/
+/* Table: 数据模型                                                  */
+/*==============================================================*/
+create table 数据模型 (
+   
+)
+go
+
+/*==============================================================*/
+/* Table: 概率模型                                                  */
+/*==============================================================*/
+create table 概率模型 (
+   Result_lib_ID        char(10)             null,
+   数据种类，3交战,2z主，1客      char(10)             null,
+   更新的数据场次              char(10)             null,
+   更新的维度时间              char(10)             null,
+   比赛类型                 char(10)             null,
+   队名                   char(10)             null,
+   总胜                   char(10)             null,
+   总平                   char(10)             null,
+   总负                   char(10)             null,
+   主胜                   char(10)             null,
+   主平                   char(10)             null,
+   主负                   char(10)             null,
+   客胜                   char(10)             null,
+   客平                   char(10)             null,
+   客负                   char(10)             null,
+   "净胜2+"               char(10)             null,
+   净胜1                  char(10)             null,
+   平                    char(10)             null,
+   净负1                  char(10)             null,
+   "净负2+"               char(10)             null,
+   进球数0                 char(10)             null,
+   进球数1                 char(10)             null,
+   进球数2                 char(10)             null,
+   "进球数3+"              char(10)             null,
+   "0-1球"               char(10)             null,
+   "2-3球"               char(10)             null,
+   "4-6球"               char(10)             null,
+   7球以上                 char(10)             null,
+   单数                   char(10)             null,
+   双数                   char(10)             null,
+   半场胜                  char(10)             null,
+   半场平                  char(10)             null,
+   半场负                  char(10)             null
+)
+go
+
+/*==============================================================*/
+/* Table: 训练模型排列                                                */
+/*==============================================================*/
+create table 训练模型排列 (
+   比赛时间                 char(10)             null,
+   比赛类型                 char(10)             null,
+   主队名                  char(10)             null,
+   客队名                  char(10)             null,
+   "主队20场-概率模型，0"       char(10)             null,
+   "客队20场-概率模型，1"       char(10)             null,
+   "交战记录-概率模型，2"        char(10)             null,
+   "主队走势-走势模型，0"        char(10)             null,
+   "客队走势-走势模型，1"        char(10)             null,
+   预测模型                 char(10)             null
+)
+go
+
+/*==============================================================*/
+/* Table: 误差检查模型                                                */
+/*==============================================================*/
+create table 误差检查模型 (
+   主队进球                 char(10)             null
+)
+go
+
+/*==============================================================*/
+/* Table: 误差检测                                                  */
+/*==============================================================*/
+create table 误差检测 (
+   胜率检查                 char(10)             null,
+   训练模型排列               char(10)             null,
+   预测模型                 char(10)             null,
+   误差检查模型               char(10)             null
+)
+go
+
+/*==============================================================*/
+/* Table: 走势模型                                                  */
+/*==============================================================*/
+create table 走势模型 (
+   Result_lib_ID        char(10)             null,
+   数据的种类，主1，客2          char(10)             null,
+   更新的数据场次              char(10)             null,
+   更新的维度时间              char(10)             null,
+   比赛类型                 char(10)             null,
+   队名                   char(10)             null,
+   6轮积分                 char(10)             null,
+   5轮积分                 char(10)             null,
+   4轮积分                 char(10)             null,
+   3轮积分                 char(10)             null,
+   2轮积分                 char(10)             null,
+   1轮积分                 char(10)             null
+)
+go
+
+/*==============================================================*/
+/* Table: 预测模型                                                  */
+/*==============================================================*/
+create table 预测模型 (
+   数据类型，历史0，预测1         char(10)             null,
+   比赛时间                 char(10)             null,
+   比赛类型                 char(10)             null,
+   主队进球                 char(10)             null,
+   客队进球                 char(10)             null,
+   半场主队进球               char(10)             null,
+   半场客队进球               char(10)             null,
+   全场，3，1，0             char(10)             null,
+   半场，3，1，0             char(10)             null,
+   模型修正系数               char(10)             null,
+   正确概率                 char(10)             null
+)
+go
+
+alter table 数据模型
+   add constraint FK_数据模型_REFERENCE_历史数据更新 foreign key ()
+      references 历史数据更新
+go
+
+alter table 概率模型
+   add constraint FK_概率模型_REFERENCE_数据模型 foreign key ()
+      references 数据模型
+go
+
+alter table 训练模型排列
+   add constraint FK_训练模型排列_REFERENCE_概率模型 foreign key ()
+      references 概率模型
+go
+
+alter table 训练模型排列
+   add constraint FK_训练模型排列_REFERENCE_走势模型 foreign key ()
+      references 走势模型
+go
+
+alter table 训练模型排列
+   add constraint FK_训练模型排列_REFERENCE_即时数据更新 foreign key ()
+      references 即时数据更新
+go
+
+alter table 训练模型排列
+   add constraint FK_训练模型排列_REFERENCE_预测模型 foreign key ()
+      references 预测模型
+go
+
+alter table 走势模型
+   add constraint FK_走势模型_REFERENCE_历史数据更新 foreign key ()
+      references 历史数据更新
+go
+
+alter table 预测模型
+   add constraint FK_预测模型_REFERENCE_历史数据更新 foreign key ()
+      references 历史数据更新
+go
+
+alter table 预测模型
+   add constraint FK_预测模型_REFERENCE_即时数据更新 foreign key ()
+      references 即时数据更新
+go
