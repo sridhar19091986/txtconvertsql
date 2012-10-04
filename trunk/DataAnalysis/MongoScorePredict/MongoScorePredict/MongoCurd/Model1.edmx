@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Analysis_Review" EntityType="Model.Store.Analysis_Review" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="live_Aibo" EntityType="Model.Store.live_Aibo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="live_okoo" EntityType="Model.Store.live_okoo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Live_Single" EntityType="Model.Store.Live_Single" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="live_Table" EntityType="Model.Store.live_Table" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="live_Table_lib" EntityType="Model.Store.live_Table_lib" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MacauPredication" EntityType="Model.Store.MacauPredication" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="match_analysis_collection" EntityType="Model.Store.match_analysis_collection" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="match_analysis_result" EntityType="Model.Store.match_analysis_result" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="match_table_xpath" EntityType="Model.Store.match_table_xpath" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="result_tb" EntityType="Model.Store.result_tb" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="result_tb_lib" EntityType="Model.Store.result_tb_lib" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="result_tb_raw" EntityType="Model.Store.result_tb_raw" store:Type="Tables" store:Schema="dbo" store:Name="result_tb_raw">
+            <DefiningQuery>SELECT 
+      [result_tb_raw].[result_tb_id] AS [result_tb_id], 
+      [result_tb_raw].[html_position] AS [html_position], 
+      [result_tb_raw].[home_team_big] AS [home_team_big], 
+      [result_tb_raw].[away_team_big] AS [away_team_big], 
+      [result_tb_raw].[match_type] AS [match_type], 
+      [result_tb_raw].[s_date] AS [s_date], 
+      [result_tb_raw].[s_time] AS [s_time], 
+      [result_tb_raw].[home_team] AS [home_team], 
+      [result_tb_raw].[away_team] AS [away_team], 
+      [result_tb_raw].[full_time_score] AS [full_time_score], 
+      [result_tb_raw].[half_time_score] AS [half_time_score], 
+      [result_tb_raw].[odds] AS [odds], 
+      [result_tb_raw].[win_loss_big] AS [win_loss_big]
+      FROM [dbo].[result_tb_raw] AS [result_tb_raw]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="Analysis_Review">
+          <Key>
+            <PropertyRef Name="analysis_review_id" />
+          </Key>
+          <Property Name="analysis_review_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="analysis_result_id" Type="int" />
+          <Property Name="live_table_lib_id" Type="int" />
+          <Property Name="result_tb_lib_id" Type="int" />
+          <Property Name="home_w" Type="int" />
+          <Property Name="home_d" Type="int" />
+          <Property Name="home_l" Type="int" />
+          <Property Name="home_goals" Type="float" />
+          <Property Name="away_goals" Type="float" />
+          <Property Name="ls_fit" Type="float" />
+          <Property Name="result_grnn" Type="nvarchar" MaxLength="20" />
+          <Property Name="result_goals" Type="nvarchar" MaxLength="20" />
+          <Property Name="result_wdl" Type="nvarchar" MaxLength="20" />
+          <Property Name="composite_fit" Type="nvarchar" MaxLength="20" />
+          <Property Name="grnn_fit" Type="nvarchar" MaxLength="100" />
+          <Property Name="pnn_fit" Type="nvarchar" MaxLength="20" />
+          <Property Name="home_team_big" Type="int" />
+          <Property Name="away_team_big" Type="int" />
+          <Property Name="match_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_time" Type="datetime" />
+          <Property Name="home_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="asia_odds" Type="nvarchar" MaxLength="50" />
+          <Property Name="full_home_goals" Type="int" />
+          <Property Name="full_away_goals" Type="int" />
+          <Property Name="bj_match_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="bj_host_odds" Type="nvarchar" MaxLength="50" />
+          <Property Name="bj_select" Type="int" />
+          <Property Name="Macau_predication" Type="nvarchar" MaxLength="50" />
+          <Property Name="Data_wdl" Type="nvarchar" MaxLength="20" />
+          <Property Name="Data_grnn" Type="nvarchar" MaxLength="20" />
+          <Property Name="Data_wdl_grnn" Type="nvarchar" MaxLength="20" />
+          <Property Name="Result_wdl_grnn" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="live_Aibo">
+          <Key>
+            <PropertyRef Name="live_Aibo_id" />
+          </Key>
+          <Property Name="live_Aibo_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="KeyValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeagueName" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_time" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatchOrder1_HomeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatchOrder1_HandicapNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatchOrder1_AwayName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="live_okoo">
+          <Key>
+            <PropertyRef Name="live_okoo_id" />
+          </Key>
+          <Property Name="live_okoo_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="KeyValue" Type="int" />
+          <Property Name="LeagueName" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_time" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatchOrder1_HomeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatchOrder1_HandicapNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatchOrder1_AwayName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ok_1_0" Type="nvarchar" MaxLength="50" />
+          <Property Name="ok_1_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="ok_1_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatchInfo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Match_1_Win" Type="nvarchar" MaxLength="50" />
+          <Property Name="Match_1_Drawn" Type="nvarchar" MaxLength="50" />
+          <Property Name="Match_1_Lost" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Live_Single">
+          <Key>
+            <PropertyRef Name="Live_Single_id" />
+          </Key>
+          <Property Name="Live_Single_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="match_time" Type="datetime" />
+          <Property Name="match_type" Type="nvarchar" MaxLength="500" />
+          <Property Name="Html_position" Type="nvarchar" MaxLength="500" />
+          <Property Name="Home_team_big" Type="nvarchar" MaxLength="500" />
+          <Property Name="Away_team_big" Type="nvarchar" MaxLength="500" />
+          <Property Name="half_score" Type="nvarchar" MaxLength="500" />
+          <Property Name="full_score" Type="nvarchar" MaxLength="500" />
+          <Property Name="Bj_odds" Type="nvarchar" MaxLength="500" />
+          <Property Name="Bj_result" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="live_Table">
+          <Key>
+            <PropertyRef Name="live_table_id" />
+          </Key>
+          <Property Name="live_table_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_team_big" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team_big" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_date" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_time" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="full_time_score" Type="nvarchar" MaxLength="50" />
+          <Property Name="half_time_score" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="live_Table_lib">
+          <Key>
+            <PropertyRef Name="live_table_lib_id" />
+          </Key>
+          <Property Name="live_table_lib_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="int" />
+          <Property Name="home_team_big" Type="int" />
+          <Property Name="away_team_big" Type="int" />
+          <Property Name="match_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_time" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_red_card" Type="int" />
+          <Property Name="away_red_card" Type="int" />
+          <Property Name="full_home_goals" Type="int" />
+          <Property Name="full_away_goals" Type="int" />
+          <Property Name="half_home_goals" Type="int" />
+          <Property Name="half_away_goals" Type="int" />
+        </EntityType>
+        <EntityType Name="MacauPredication">
+          <Key>
+            <PropertyRef Name="MacauPredication_id" />
+          </Key>
+          <Property Name="MacauPredication_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Record_datetime" Type="datetime" />
+          <Property Name="Home_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="Away_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="Macauslot" Type="nvarchar" MaxLength="500" />
+          <Property Name="Predication" Type="nvarchar" MaxLength="50" />
+          <Property Name="Accuracy" Type="int" />
+        </EntityType>
+        <EntityType Name="match_analysis_collection">
+          <Key>
+            <PropertyRef Name="analysis_collection_id" />
+          </Key>
+          <Property Name="analysis_collection_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="live_table_lib_id" Type="int" Nullable="false" />
+          <Property Name="result_tb_lib_id" Type="int" />
+        </EntityType>
+        <EntityType Name="match_analysis_result">
+          <Key>
+            <PropertyRef Name="analysis_result_id" />
+          </Key>
+          <Property Name="analysis_result_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="live_table_lib_id" Type="int" />
+          <Property Name="result_tb_lib_id" Type="int" />
+          <Property Name="pre_algorithm" Type="nvarchar" MaxLength="20" />
+          <Property Name="pre_match_count" Type="int" />
+          <Property Name="home_w" Type="int" />
+          <Property Name="home_d" Type="int" />
+          <Property Name="home_l" Type="int" />
+          <Property Name="home_goals" Type="float" />
+          <Property Name="away_goals" Type="float" />
+          <Property Name="fit_win_loss" Type="float" />
+          <Property Name="fit_goals" Type="float" />
+          <Property Name="fit_odd_even" Type="float" />
+          <Property Name="result_fit" Type="nvarchar" MaxLength="20" />
+          <Property Name="result_goals" Type="nvarchar" MaxLength="20" />
+          <Property Name="result_wdl" Type="nvarchar" MaxLength="20" />
+          <Property Name="cross_goals" Type="float" />
+          <Property Name="myfit" Type="nvarchar" MaxLength="20" />
+          <Property Name="recent_scores" Type="int" />
+          <Property Name="recent_2scores" Type="int" />
+          <Property Name="recent_3scores" Type="int" />
+          <Property Name="recent_4scores" Type="int" />
+          <Property Name="recent_5scores" Type="int" />
+          <Property Name="recent_6scores" Type="int" />
+          <Property Name="grnn_fit" Type="nvarchar" MaxLength="100" />
+          <Property Name="pnn_fit" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="match_table_xpath">
+          <Key>
+            <PropertyRef Name="uri_host_id" />
+          </Key>
+          <Property Name="uri_host_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="uri_host" Type="nvarchar" MaxLength="500" />
+          <Property Name="max_table_xpath" Type="nvarchar" MaxLength="500" />
+          <Property Name="max_table_id_value" Type="nvarchar" MaxLength="500" />
+          <Property Name="second_table_xpath" Type="nvarchar" MaxLength="500" />
+          <Property Name="second_table_id_value" Type="nvarchar" MaxLength="500" />
+          <Property Name="order_table_id" Type="int" />
+        </EntityType>
+        <EntityType Name="result_tb">
+          <Key>
+            <PropertyRef Name="result_tb_id" />
+          </Key>
+          <Property Name="result_tb_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_team_big" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team_big" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_date" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_time" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="full_time_score" Type="nvarchar" MaxLength="50" />
+          <Property Name="half_time_score" Type="nvarchar" MaxLength="50" />
+          <Property Name="odds" Type="nvarchar" MaxLength="50" />
+          <Property Name="win_loss_big" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="result_tb_lib">
+          <Key>
+            <PropertyRef Name="result_tb_lib_id" />
+          </Key>
+          <Property Name="result_tb_lib_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="int" />
+          <Property Name="home_team_big" Type="int" />
+          <Property Name="away_team_big" Type="int" />
+          <Property Name="match_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_time" Type="datetime" />
+          <Property Name="home_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="odds" Type="nvarchar" MaxLength="50" />
+          <Property Name="win_loss_big" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_red_card" Type="int" />
+          <Property Name="away_red_card" Type="int" />
+          <Property Name="full_home_goals" Type="int" />
+          <Property Name="full_away_goals" Type="int" />
+          <Property Name="half_home_goals" Type="int" />
+          <Property Name="half_away_goals" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'G:\htmlconvertsql\match_analysis_pdm.mdf.dbo.result_tb_raw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="result_tb_raw">
+          <Key>
+            <PropertyRef Name="result_tb_id" />
+          </Key>
+          <Property Name="result_tb_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_team_big" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team_big" Type="nvarchar" MaxLength="50" />
+          <Property Name="match_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_date" Type="nvarchar" MaxLength="50" />
+          <Property Name="s_time" Type="nvarchar" MaxLength="50" />
+          <Property Name="home_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="away_team" Type="nvarchar" MaxLength="50" />
+          <Property Name="full_time_score" Type="nvarchar" MaxLength="50" />
+          <Property Name="half_time_score" Type="nvarchar" MaxLength="50" />
+          <Property Name="odds" Type="nvarchar" MaxLength="50" />
+          <Property Name="win_loss_big" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MatchAnalysis" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Analysis_Review" EntityType="Model.Analysis_Review" />
+          <EntitySet Name="live_Aibo" EntityType="Model.live_Aibo" />
+          <EntitySet Name="live_okoo" EntityType="Model.live_okoo" />
+          <EntitySet Name="Live_Single" EntityType="Model.Live_Single" />
+          <EntitySet Name="live_Table" EntityType="Model.live_Table" />
+          <EntitySet Name="live_Table_lib" EntityType="Model.live_Table_lib" />
+          <EntitySet Name="MacauPredication" EntityType="Model.MacauPredication" />
+          <EntitySet Name="match_analysis_collection" EntityType="Model.match_analysis_collection" />
+          <EntitySet Name="match_analysis_result" EntityType="Model.match_analysis_result" />
+          <EntitySet Name="match_table_xpath" EntityType="Model.match_table_xpath" />
+          <EntitySet Name="result_tb" EntityType="Model.result_tb" />
+          <EntitySet Name="result_tb_lib" EntityType="Model.result_tb_lib" />
+          <EntitySet Name="result_tb_raw" EntityType="Model.result_tb_raw" />
+        </EntityContainer>
+        <EntityType Name="Analysis_Review">
+          <Key>
+            <PropertyRef Name="analysis_review_id" />
+          </Key>
+          <Property Name="analysis_review_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="analysis_result_id" Type="Int32" />
+          <Property Name="live_table_lib_id" Type="Int32" />
+          <Property Name="result_tb_lib_id" Type="Int32" />
+          <Property Name="home_w" Type="Int32" />
+          <Property Name="home_d" Type="Int32" />
+          <Property Name="home_l" Type="Int32" />
+          <Property Name="home_goals" Type="Double" />
+          <Property Name="away_goals" Type="Double" />
+          <Property Name="ls_fit" Type="Double" />
+          <Property Name="result_grnn" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="result_goals" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="result_wdl" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="composite_fit" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="grnn_fit" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="pnn_fit" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="home_team_big" Type="Int32" />
+          <Property Name="away_team_big" Type="Int32" />
+          <Property Name="match_type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_time" Type="DateTime" />
+          <Property Name="home_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="asia_odds" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="full_home_goals" Type="Int32" />
+          <Property Name="full_away_goals" Type="Int32" />
+          <Property Name="bj_match_number" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="bj_host_odds" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="bj_select" Type="Int32" />
+          <Property Name="Macau_predication" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Data_wdl" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Data_grnn" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Data_wdl_grnn" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Result_wdl_grnn" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="live_Aibo">
+          <Key>
+            <PropertyRef Name="live_Aibo_id" />
+          </Key>
+          <Property Name="live_Aibo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyValue" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LeagueName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_time" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MatchOrder1_HomeName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MatchOrder1_HandicapNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MatchOrder1_AwayName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="live_okoo">
+          <Key>
+            <PropertyRef Name="live_okoo_id" />
+          </Key>
+          <Property Name="live_okoo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyValue" Type="Int32" />
+          <Property Name="LeagueName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_time" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MatchOrder1_HomeName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MatchOrder1_HandicapNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MatchOrder1_AwayName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ok_1_0" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ok_1_1" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ok_1_2" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MatchInfo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Match_1_Win" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Match_1_Drawn" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Match_1_Lost" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Live_Single">
+          <Key>
+            <PropertyRef Name="Live_Single_id" />
+          </Key>
+          <Property Name="Live_Single_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="match_time" Type="DateTime" />
+          <Property Name="match_type" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Html_position" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Home_team_big" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Away_team_big" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="half_score" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="full_score" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Bj_odds" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Bj_result" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="live_Table">
+          <Key>
+            <PropertyRef Name="live_table_id" />
+          </Key>
+          <Property Name="live_table_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_team_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_date" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_time" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="status" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="full_time_score" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="half_time_score" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="live_Table_lib">
+          <Key>
+            <PropertyRef Name="live_table_lib_id" />
+          </Key>
+          <Property Name="live_table_lib_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="Int32" />
+          <Property Name="home_team_big" Type="Int32" />
+          <Property Name="away_team_big" Type="Int32" />
+          <Property Name="match_type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_time" Type="DateTime" />
+          <Property Name="status" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_red_card" Type="Int32" />
+          <Property Name="away_red_card" Type="Int32" />
+          <Property Name="full_home_goals" Type="Int32" />
+          <Property Name="full_away_goals" Type="Int32" />
+          <Property Name="half_home_goals" Type="Int32" />
+          <Property Name="half_away_goals" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MacauPredication">
+          <Key>
+            <PropertyRef Name="MacauPredication_id" />
+          </Key>
+          <Property Name="MacauPredication_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Record_datetime" Type="DateTime" />
+          <Property Name="Home_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Away_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Macauslot" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Predication" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Accuracy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="match_analysis_collection">
+          <Key>
+            <PropertyRef Name="analysis_collection_id" />
+          </Key>
+          <Property Name="analysis_collection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="live_table_lib_id" Type="Int32" Nullable="false" />
+          <Property Name="result_tb_lib_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="match_analysis_result">
+          <Key>
+            <PropertyRef Name="analysis_result_id" />
+          </Key>
+          <Property Name="analysis_result_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="live_table_lib_id" Type="Int32" />
+          <Property Name="result_tb_lib_id" Type="Int32" />
+          <Property Name="pre_algorithm" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="pre_match_count" Type="Int32" />
+          <Property Name="home_w" Type="Int32" />
+          <Property Name="home_d" Type="Int32" />
+          <Property Name="home_l" Type="Int32" />
+          <Property Name="home_goals" Type="Double" />
+          <Property Name="away_goals" Type="Double" />
+          <Property Name="fit_win_loss" Type="Double" />
+          <Property Name="fit_goals" Type="Double" />
+          <Property Name="fit_odd_even" Type="Double" />
+          <Property Name="result_fit" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="result_goals" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="result_wdl" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="cross_goals" Type="Double" />
+          <Property Name="myfit" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="recent_scores" Type="Int32" />
+          <Property Name="recent_2scores" Type="Int32" />
+          <Property Name="recent_3scores" Type="Int32" />
+          <Property Name="recent_4scores" Type="Int32" />
+          <Property Name="recent_5scores" Type="Int32" />
+          <Property Name="recent_6scores" Type="Int32" />
+          <Property Name="grnn_fit" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="pnn_fit" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="match_table_xpath">
+          <Key>
+            <PropertyRef Name="uri_host_id" />
+          </Key>
+          <Property Name="uri_host_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uri_host" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="max_table_xpath" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="max_table_id_value" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="second_table_xpath" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="second_table_id_value" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="order_table_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="result_tb">
+          <Key>
+            <PropertyRef Name="result_tb_id" />
+          </Key>
+          <Property Name="result_tb_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_team_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_date" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_time" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="full_time_score" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="half_time_score" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="odds" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="win_loss_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="result_tb_lib">
+          <Key>
+            <PropertyRef Name="result_tb_lib_id" />
+          </Key>
+          <Property Name="result_tb_lib_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="Int32" />
+          <Property Name="home_team_big" Type="Int32" />
+          <Property Name="away_team_big" Type="Int32" />
+          <Property Name="match_type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_time" Type="DateTime" />
+          <Property Name="home_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="odds" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="win_loss_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_red_card" Type="Int32" />
+          <Property Name="away_red_card" Type="Int32" />
+          <Property Name="full_home_goals" Type="Int32" />
+          <Property Name="full_away_goals" Type="Int32" />
+          <Property Name="half_home_goals" Type="Int32" />
+          <Property Name="half_away_goals" Type="Int32" />
+        </EntityType>
+        <EntityType Name="result_tb_raw">
+          <Key>
+            <PropertyRef Name="result_tb_id" />
+          </Key>
+          <Property Name="result_tb_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="html_position" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_team_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="match_type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_date" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="s_time" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="home_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="away_team" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="full_time_score" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="half_time_score" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="odds" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="win_loss_big" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="MatchAnalysis">
+          <EntitySetMapping Name="Analysis_Review"><EntityTypeMapping TypeName="Model.Analysis_Review"><MappingFragment StoreEntitySet="Analysis_Review">
+            <ScalarProperty Name="analysis_review_id" ColumnName="analysis_review_id" />
+            <ScalarProperty Name="analysis_result_id" ColumnName="analysis_result_id" />
+            <ScalarProperty Name="live_table_lib_id" ColumnName="live_table_lib_id" />
+            <ScalarProperty Name="result_tb_lib_id" ColumnName="result_tb_lib_id" />
+            <ScalarProperty Name="home_w" ColumnName="home_w" />
+            <ScalarProperty Name="home_d" ColumnName="home_d" />
+            <ScalarProperty Name="home_l" ColumnName="home_l" />
+            <ScalarProperty Name="home_goals" ColumnName="home_goals" />
+            <ScalarProperty Name="away_goals" ColumnName="away_goals" />
+            <ScalarProperty Name="ls_fit" ColumnName="ls_fit" />
+            <ScalarProperty Name="result_grnn" ColumnName="result_grnn" />
+            <ScalarProperty Name="result_goals" ColumnName="result_goals" />
+            <ScalarProperty Name="result_wdl" ColumnName="result_wdl" />
+            <ScalarProperty Name="composite_fit" ColumnName="composite_fit" />
+            <ScalarProperty Name="grnn_fit" ColumnName="grnn_fit" />
+            <ScalarProperty Name="pnn_fit" ColumnName="pnn_fit" />
+            <ScalarProperty Name="home_team_big" ColumnName="home_team_big" />
+            <ScalarProperty Name="away_team_big" ColumnName="away_team_big" />
+            <ScalarProperty Name="match_type" ColumnName="match_type" />
+            <ScalarProperty Name="match_time" ColumnName="match_time" />
+            <ScalarProperty Name="home_team" ColumnName="home_team" />
+            <ScalarProperty Name="away_team" ColumnName="away_team" />
+            <ScalarProperty Name="asia_odds" ColumnName="asia_odds" />
+            <ScalarProperty Name="full_home_goals" ColumnName="full_home_goals" />
+            <ScalarProperty Name="full_away_goals" ColumnName="full_away_goals" />
+            <ScalarProperty Name="bj_match_number" ColumnName="bj_match_number" />
+            <ScalarProperty Name="bj_host_odds" ColumnName="bj_host_odds" />
+            <ScalarProperty Name="bj_select" ColumnName="bj_select" />
+            <ScalarProperty Name="Macau_predication" ColumnName="Macau_predication" />
+            <ScalarProperty Name="Data_wdl" ColumnName="Data_wdl" />
+            <ScalarProperty Name="Data_grnn" ColumnName="Data_grnn" />
+            <ScalarProperty Name="Data_wdl_grnn" ColumnName="Data_wdl_grnn" />
+            <ScalarProperty Name="Result_wdl_grnn" ColumnName="Result_wdl_grnn" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="live_Aibo"><EntityTypeMapping TypeName="Model.live_Aibo"><MappingFragment StoreEntitySet="live_Aibo">
+            <ScalarProperty Name="live_Aibo_id" ColumnName="live_Aibo_id" />
+            <ScalarProperty Name="KeyValue" ColumnName="KeyValue" />
+            <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
+            <ScalarProperty Name="match_time" ColumnName="match_time" />
+            <ScalarProperty Name="MatchOrder1_HomeName" ColumnName="MatchOrder1_HomeName" />
+            <ScalarProperty Name="MatchOrder1_HandicapNumber" ColumnName="MatchOrder1_HandicapNumber" />
+            <ScalarProperty Name="MatchOrder1_AwayName" ColumnName="MatchOrder1_AwayName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="live_okoo"><EntityTypeMapping TypeName="Model.live_okoo"><MappingFragment StoreEntitySet="live_okoo">
+            <ScalarProperty Name="live_okoo_id" ColumnName="live_okoo_id" />
+            <ScalarProperty Name="KeyValue" ColumnName="KeyValue" />
+            <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
+            <ScalarProperty Name="match_time" ColumnName="match_time" />
+            <ScalarProperty Name="MatchOrder1_HomeName" ColumnName="MatchOrder1_HomeName" />
+            <ScalarProperty Name="MatchOrder1_HandicapNumber" ColumnName="MatchOrder1_HandicapNumber" />
+            <ScalarProperty Name="MatchOrder1_AwayName" ColumnName="MatchOrder1_AwayName" />
+            <ScalarProperty Name="ok_1_0" ColumnName="ok_1_0" />
+            <ScalarProperty Name="ok_1_1" ColumnName="ok_1_1" />
+            <ScalarProperty Name="ok_1_2" ColumnName="ok_1_2" />
+            <ScalarProperty Name="MatchInfo" ColumnName="MatchInfo" />
+            <ScalarProperty Name="Match_1_Win" ColumnName="Match_1_Win" />
+            <ScalarProperty Name="Match_1_Drawn" ColumnName="Match_1_Drawn" />
+            <ScalarProperty Name="Match_1_Lost" ColumnName="Match_1_Lost" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Live_Single"><EntityTypeMapping TypeName="Model.Live_Single"><MappingFragment StoreEntitySet="Live_Single">
+            <ScalarProperty Name="Live_Single_id" ColumnName="Live_Single_id" />
+            <ScalarProperty Name="match_time" ColumnName="match_time" />
+            <ScalarProperty Name="match_type" ColumnName="match_type" />
+            <ScalarProperty Name="Html_position" ColumnName="Html_position" />
+            <ScalarProperty Name="Home_team_big" ColumnName="Home_team_big" />
+            <ScalarProperty Name="Away_team_big" ColumnName="Away_team_big" />
+            <ScalarProperty Name="half_score" ColumnName="half_score" />
+            <ScalarProperty Name="full_score" ColumnName="full_score" />
+            <ScalarProperty Name="Bj_odds" ColumnName="Bj_odds" />
+            <ScalarProperty Name="Bj_result" ColumnName="Bj_result" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="live_Table"><EntityTypeMapping TypeName="Model.live_Table"><MappingFragment StoreEntitySet="live_Table">
+            <ScalarProperty Name="live_table_id" ColumnName="live_table_id" />
+            <ScalarProperty Name="html_position" ColumnName="html_position" />
+            <ScalarProperty Name="home_team_big" ColumnName="home_team_big" />
+            <ScalarProperty Name="away_team_big" ColumnName="away_team_big" />
+            <ScalarProperty Name="match_type" ColumnName="match_type" />
+            <ScalarProperty Name="s_date" ColumnName="s_date" />
+            <ScalarProperty Name="s_time" ColumnName="s_time" />
+            <ScalarProperty Name="status" ColumnName="status" />
+            <ScalarProperty Name="home_team" ColumnName="home_team" />
+            <ScalarProperty Name="away_team" ColumnName="away_team" />
+            <ScalarProperty Name="full_time_score" ColumnName="full_time_score" />
+            <ScalarProperty Name="half_time_score" ColumnName="half_time_score" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="live_Table_lib"><EntityTypeMapping TypeName="Model.live_Table_lib"><MappingFragment StoreEntitySet="live_Table_lib">
+            <ScalarProperty Name="live_table_lib_id" ColumnName="live_table_lib_id" />
+            <ScalarProperty Name="html_position" ColumnName="html_position" />
+            <ScalarProperty Name="home_team_big" ColumnName="home_team_big" />
+            <ScalarProperty Name="away_team_big" ColumnName="away_team_big" />
+            <ScalarProperty Name="match_type" ColumnName="match_type" />
+            <ScalarProperty Name="match_time" ColumnName="match_time" />
+            <ScalarProperty Name="status" ColumnName="status" />
+            <ScalarProperty Name="home_team" ColumnName="home_team" />
+            <ScalarProperty Name="away_team" ColumnName="away_team" />
+            <ScalarProperty Name="home_red_card" ColumnName="home_red_card" />
+            <ScalarProperty Name="away_red_card" ColumnName="away_red_card" />
+            <ScalarProperty Name="full_home_goals" ColumnName="full_home_goals" />
+            <ScalarProperty Name="full_away_goals" ColumnName="full_away_goals" />
+            <ScalarProperty Name="half_home_goals" ColumnName="half_home_goals" />
+            <ScalarProperty Name="half_away_goals" ColumnName="half_away_goals" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MacauPredication"><EntityTypeMapping TypeName="Model.MacauPredication"><MappingFragment StoreEntitySet="MacauPredication">
+            <ScalarProperty Name="MacauPredication_id" ColumnName="MacauPredication_id" />
+            <ScalarProperty Name="Record_datetime" ColumnName="Record_datetime" />
+            <ScalarProperty Name="Home_team" ColumnName="Home_team" />
+            <ScalarProperty Name="Away_team" ColumnName="Away_team" />
+            <ScalarProperty Name="Macauslot" ColumnName="Macauslot" />
+            <ScalarProperty Name="Predication" ColumnName="Predication" />
+            <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="match_analysis_collection"><EntityTypeMapping TypeName="Model.match_analysis_collection"><MappingFragment StoreEntitySet="match_analysis_collection">
+            <ScalarProperty Name="analysis_collection_id" ColumnName="analysis_collection_id" />
+            <ScalarProperty Name="live_table_lib_id" ColumnName="live_table_lib_id" />
+            <ScalarProperty Name="result_tb_lib_id" ColumnName="result_tb_lib_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="match_analysis_result"><EntityTypeMapping TypeName="Model.match_analysis_result"><MappingFragment StoreEntitySet="match_analysis_result">
+            <ScalarProperty Name="analysis_result_id" ColumnName="analysis_result_id" />
+            <ScalarProperty Name="live_table_lib_id" ColumnName="live_table_lib_id" />
+            <ScalarProperty Name="result_tb_lib_id" ColumnName="result_tb_lib_id" />
+            <ScalarProperty Name="pre_algorithm" ColumnName="pre_algorithm" />
+            <ScalarProperty Name="pre_match_count" ColumnName="pre_match_count" />
+            <ScalarProperty Name="home_w" ColumnName="home_w" />
+            <ScalarProperty Name="home_d" ColumnName="home_d" />
+            <ScalarProperty Name="home_l" ColumnName="home_l" />
+            <ScalarProperty Name="home_goals" ColumnName="home_goals" />
+            <ScalarProperty Name="away_goals" ColumnName="away_goals" />
+            <ScalarProperty Name="fit_win_loss" ColumnName="fit_win_loss" />
+            <ScalarProperty Name="fit_goals" ColumnName="fit_goals" />
+            <ScalarProperty Name="fit_odd_even" ColumnName="fit_odd_even" />
+            <ScalarProperty Name="result_fit" ColumnName="result_fit" />
+            <ScalarProperty Name="result_goals" ColumnName="result_goals" />
+            <ScalarProperty Name="result_wdl" ColumnName="result_wdl" />
+            <ScalarProperty Name="cross_goals" ColumnName="cross_goals" />
+            <ScalarProperty Name="myfit" ColumnName="myfit" />
+            <ScalarProperty Name="recent_scores" ColumnName="recent_scores" />
+            <ScalarProperty Name="recent_2scores" ColumnName="recent_2scores" />
+            <ScalarProperty Name="recent_3scores" ColumnName="recent_3scores" />
+            <ScalarProperty Name="recent_4scores" ColumnName="recent_4scores" />
+            <ScalarProperty Name="recent_5scores" ColumnName="recent_5scores" />
+            <ScalarProperty Name="recent_6scores" ColumnName="recent_6scores" />
+            <ScalarProperty Name="grnn_fit" ColumnName="grnn_fit" />
+            <ScalarProperty Name="pnn_fit" ColumnName="pnn_fit" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="match_table_xpath"><EntityTypeMapping TypeName="Model.match_table_xpath"><MappingFragment StoreEntitySet="match_table_xpath">
+            <ScalarProperty Name="uri_host_id" ColumnName="uri_host_id" />
+            <ScalarProperty Name="uri_host" ColumnName="uri_host" />
+            <ScalarProperty Name="max_table_xpath" ColumnName="max_table_xpath" />
+            <ScalarProperty Name="max_table_id_value" ColumnName="max_table_id_value" />
+            <ScalarProperty Name="second_table_xpath" ColumnName="second_table_xpath" />
+            <ScalarProperty Name="second_table_id_value" ColumnName="second_table_id_value" />
+            <ScalarProperty Name="order_table_id" ColumnName="order_table_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="result_tb"><EntityTypeMapping TypeName="Model.result_tb"><MappingFragment StoreEntitySet="result_tb">
+            <ScalarProperty Name="result_tb_id" ColumnName="result_tb_id" />
+            <ScalarProperty Name="html_position" ColumnName="html_position" />
+            <ScalarProperty Name="home_team_big" ColumnName="home_team_big" />
+            <ScalarProperty Name="away_team_big" ColumnName="away_team_big" />
+            <ScalarProperty Name="match_type" ColumnName="match_type" />
+            <ScalarProperty Name="s_date" ColumnName="s_date" />
+            <ScalarProperty Name="s_time" ColumnName="s_time" />
+            <ScalarProperty Name="home_team" ColumnName="home_team" />
+            <ScalarProperty Name="away_team" ColumnName="away_team" />
+            <ScalarProperty Name="full_time_score" ColumnName="full_time_score" />
+            <ScalarProperty Name="half_time_score" ColumnName="half_time_score" />
+            <ScalarProperty Name="odds" ColumnName="odds" />
+            <ScalarProperty Name="win_loss_big" ColumnName="win_loss_big" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="result_tb_lib"><EntityTypeMapping TypeName="Model.result_tb_lib"><MappingFragment StoreEntitySet="result_tb_lib">
+            <ScalarProperty Name="result_tb_lib_id" ColumnName="result_tb_lib_id" />
+            <ScalarProperty Name="html_position" ColumnName="html_position" />
+            <ScalarProperty Name="home_team_big" ColumnName="home_team_big" />
+            <ScalarProperty Name="away_team_big" ColumnName="away_team_big" />
+            <ScalarProperty Name="match_type" ColumnName="match_type" />
+            <ScalarProperty Name="match_time" ColumnName="match_time" />
+            <ScalarProperty Name="home_team" ColumnName="home_team" />
+            <ScalarProperty Name="away_team" ColumnName="away_team" />
+            <ScalarProperty Name="odds" ColumnName="odds" />
+            <ScalarProperty Name="win_loss_big" ColumnName="win_loss_big" />
+            <ScalarProperty Name="home_red_card" ColumnName="home_red_card" />
+            <ScalarProperty Name="away_red_card" ColumnName="away_red_card" />
+            <ScalarProperty Name="full_home_goals" ColumnName="full_home_goals" />
+            <ScalarProperty Name="full_away_goals" ColumnName="full_away_goals" />
+            <ScalarProperty Name="half_home_goals" ColumnName="half_home_goals" />
+            <ScalarProperty Name="half_away_goals" ColumnName="half_away_goals" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="result_tb_raw"><EntityTypeMapping TypeName="Model.result_tb_raw"><MappingFragment StoreEntitySet="result_tb_raw">
+            <ScalarProperty Name="result_tb_id" ColumnName="result_tb_id" />
+            <ScalarProperty Name="html_position" ColumnName="html_position" />
+            <ScalarProperty Name="home_team_big" ColumnName="home_team_big" />
+            <ScalarProperty Name="away_team_big" ColumnName="away_team_big" />
+            <ScalarProperty Name="match_type" ColumnName="match_type" />
+            <ScalarProperty Name="s_date" ColumnName="s_date" />
+            <ScalarProperty Name="s_time" ColumnName="s_time" />
+            <ScalarProperty Name="home_team" ColumnName="home_team" />
+            <ScalarProperty Name="away_team" ColumnName="away_team" />
+            <ScalarProperty Name="full_time_score" ColumnName="full_time_score" />
+            <ScalarProperty Name="half_time_score" ColumnName="half_time_score" />
+            <ScalarProperty Name="odds" ColumnName="odds" />
+            <ScalarProperty Name="win_loss_big" ColumnName="win_loss_big" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1" ZoomLevel="86">
+        <EntityTypeShape EntityType="Model.Analysis_Review" Width="1.5" PointX="0.75" PointY="0.75" Height="6.5121875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.live_Aibo" Width="1.5" PointX="2.75" PointY="0.75" Height="2.1280729166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.live_okoo" Width="1.5" PointX="2.75" PointY="3.75" Height="3.3084114583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Live_Single" Width="1.5" PointX="4.75" PointY="0.75" Height="2.6339322916666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.live_Table" Width="1.5" PointX="4.75" PointY="4.75" Height="2.9711718749999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.live_Table_lib" Width="1.5" PointX="6.75" PointY="0.75" Height="3.4770312499999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MacauPredication" Width="1.5" PointX="6.75" PointY="5.75" Height="2.1280729166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.match_analysis_collection" Width="1.5" PointX="8.75" PointY="0.75" Height="1.4535937499999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.match_analysis_result" Width="1.5" PointX="0.75" PointY="8.75" Height="5.3318489583333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.match_table_xpath" Width="1.5" PointX="2.75" PointY="8.75" Height="2.1280729166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.result_tb" Width="1.5" PointX="8.75" PointY="3.75" Height="3.1397916666666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.result_tb_lib" Width="1.5" PointX="4.75" PointY="8.75" Height="3.6456510416666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.result_tb_raw" Width="1.5" PointX="6.75" PointY="8.75" Height="3.1397916666666674" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
