@@ -11,116 +11,124 @@
  * 
  * 按照日期进行分割。滚动预测。
  * 
+ * 
+ * 算法设计比较重要
+ * 
+ * 这里为什么会出现不能计算的情况呢?估计是维度的问题，直接用matlab进行模拟，最后用get;set属性屏蔽部分字段，达到降维的目标
+ * 
  * */
+
+#define abc
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+using System.IO;
+using System.Reflection;
+using MongoScorePredict.Extensions;
+using System.Collections;
 
 namespace MongoScorePredict.DataMingForMatlab
 {
-    class DataMingForMatlab
+    public class DataMingForMatlabs
     {
+        public static void CreateCollection()
+        {
+            using (SimulinkMatchNow smm = new SimulinkMatchNow())
+                smm.CreateLiveCollection();
+            GC.Collect();
+            using (SimulinkMatchOver smo = new SimulinkMatchOver())
+                smo.CreateLiveCollection();
+            GC.Collect();
+            Console.WriteLine("CreateCollection->mongo->ok");
 
-        public void create()
+        }
+        public static void Simulink()
         {
             SimulinkMatchNow smm = new SimulinkMatchNow();
-            smm.mongocrud.BulkMongo(matchnowf.ToList(), true);
-
             SimulinkMatchOver smo = new SimulinkMatchOver();
-            smo.mongocrud.BulkMongo(matchover.ToList(), true);
-
-            strBuilder = new StringBuilder();
-            for (int j = start_column; j < dataGridView1.Columns.Count; j++)
-            {
-                strBuilder.Append(dataGridView1.Rows[i].Cells[j].Value.ToString() + ' ');
-            }
-            strBuilder.Remove(strBuilder.Length - 1, 1);
-            sw.WriteLine(strBuilder.ToString());
-
-}
-        int simulinkno = 0;
-        private void SimulinkGRNN()
-        {
-            simulinkno++;
-            bool lessDimention = false;
-            richTextBox3.Text = string.Empty;
-            ExportToExcel.DataGridView2Txt(dataGridView2, nn.tempy, 7);
-            ExportToExcel.DataGridView2Txt(dataGridView3, nn.tempx, 7);
-            StreamReader streamx = new StreamReader(nn.tempx, System.Text.Encoding.Default);
-            StreamReader streamy = new StreamReader(nn.tempy, System.Text.Encoding.Default);
-            SimulinkRbfLog srlog = new SimulinkRbfLog();
             SimulinkRbf simulinkrbf = new SimulinkRbf();
-            try
+            int simulinkno = 0;
+            var lookup_now = smm.mongocrud.QueryMongo().Where(e=>e.Hmatch_count==20)
+                .Where(e=>e.Amatch_count==20)
+                .Where(e=>e.Jmatch_count>0).ToLookup(e => e.live);
+            var lookup_over = smo.mongocrud.QueryMongo().Where(e=>e.Hmatch_count==20)
+                .Where(e=>e.Amatch_count==20)
+                .Where(e=>e.Jmatch_count>0).ToLookup(e => e.live);
+            foreach (var nowM in lookup_now)
             {
-                //MessageBox.Show("ok");
-                //exe文件方式
-                //result = ExportToExcel.SimulinkNN(@"D:\My Documents\MATLAB\mygrnn.exe");
-                //dll文件方式
-                #region MyRegion  //测试程序
-                srlog._id = simulinkno;
-                srlog.matchtype = label9.Text;
-                srlog.matchover = streamy.ReadToEnd();   //y是训练用
-                srlog.matchnow = streamx.ReadToEnd();  //x是预测目标
-                if (srlog.matchnow.Length < 10 || srlog.matchover.Length < 10) lessDimention = true;
-                if (lessDimention)
-                {
-                    simulinkrbf.mongocrud.MongoCol.Insert(srlog);
-                    return;
-                }
+                simulinkno++;
+                NNPredication nn = new NNPredication();
+                DataTable dt1 = nowM.ToDataTable();
+                string streamx=DataTable2Txt(dt1, nn.tempx);
+                var overM = lookup_over[0];
+                if (!overM.Any()) continue;
+                DataTable dt2 = overM.ToDataTable();
+                string streamy= DataTable2Txt(dt2, nn.tempy);
+                //StreamReader streamx = new StreamReader(nn.tempx, System.Text.Encoding.Default);
+                //StreamReader streamy = new StreamReader(nn.tempy, System.Text.Encoding.Default);
+                SimulinkRbfLog srlog = new SimulinkRbfLog();
+                srlog._id = simulinkno; Console.WriteLine(srlog._id);
+                //srlog.matchtype = nowM.Key;
+                srlog.matchover = streamy;  //y是训练用
+                srlog.matchnow = streamx;  //x是预测目标
+                srlog.matchnowColumn = getDataTableColumnName(dt1);
+                srlog.matchoverColumn = getDataTableColumnName(dt2);
+                srlog.matchid = nowM.Select(e => e._id.ToString()).ToList().Aggregate((a, b) => a + "\n" + b);
                 srlog.grnn = nn.NewGrnn();
                 srlog.pnn = nn.NewPnn();
                 simulinkrbf.mongocrud.MongoCol.Insert(srlog);
-                var result = mergeGrnnPnn(srlog.grnn, srlog.pnn);
-                #endregion
+                //streamx.Close();
+                //streamy.Close();
+            }
+            Console.WriteLine("Simulink->mongo->ok");
+        }
 
-                //dataGridView3.Columns.Add("...", "...");
-                dataGridView3.Columns.Add("MyGRNN", "MyGRNN");
+        public static string getDataTableColumnName(DataTable dt1)
+        {
+            StringBuilder strBuilder = new StringBuilder();
 
-                int colx = dataGridView3.Columns.Count - 1;
-                int ix = 0;
-                //string[] lines = result.Split(new char[] { '\r', '\n' });
-                foreach (string line in result)
-                //if (line != null)
-                //    if (line.Trim().Length > 0)
-                //        if (line.IndexOf("=") == -1)
-                //        {
+                for (int j = 0; j < dt1.Columns.Count; j++)
                 {
-                    richTextBox3.Text += line + "\r\n";
-                    dataGridView3.Rows[ix].Cells[colx].Value = line;
-                    ix++;
-
+                    strBuilder.Append(dt1.Columns[j].ColumnName + ' ');
                 }
-                //}
+                return strBuilder.ToString(); 
+        }
 
-
-                using (DataClassesMatchDataContext matches = new DataClassesMatchDataContext(Conn.conn))
+        public static string DataTable2Txt(DataTable dt1, string filename)
+        {
+            FileStream sr = File.Open(filename, FileMode.Create);
+            StreamWriter sw = new StreamWriter(sr, System.Text.Encoding.Default);
+            StringBuilder strBuilder = new StringBuilder();
+            StringBuilder sbuilder= new StringBuilder();
+            try
+            {
+                for (int i = 0; i < dt1.Rows.Count; i++)
                 {
-                    int resultid = 0;
-                    int col = dataGridView3.Columns.Count - 1;
-                    string grnnfit = null;
-                    for (int i = 0; i < dataGridView3.Rows.Count; i++)
+                    strBuilder = new StringBuilder();
+                    for (int j =0; j < dt1.Columns.Count; j++)
                     {
-                        resultid = Int32.Parse(dataGridView3.Rows[i].Cells[0].Value.ToString());
-                        grnnfit = dataGridView3.Rows[i].Cells[col].Value.ToString();
-                        var mar = matches.Match_analysis_result
-                            .Where(e => e.Analysis_result_id == resultid).First();//查找需要更新的数据
-                        mar.Grnn_fit = grnnfit.Trim();
+                        strBuilder.Append(dt1.Rows[i][j].ToString() + ' ');
                     }
-                    matches.SubmitChanges();
+                    strBuilder.Remove(strBuilder.Length - 1, 1);
+                    sw.WriteLine(strBuilder.ToString());
+                    sbuilder.AppendLine(strBuilder.ToString());
                 }
-                //MessageBox.Show("OK");
+              
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Console.WriteLine(ex.ToString());
             }
             finally
             {
-                streamx.Close(); streamx.Dispose();
-                streamy.Close(); streamy.Dispose();
+                sw.Close();
+                sr.Close();
             }
+            return sbuilder.ToString();
         }
     }
 }
+        

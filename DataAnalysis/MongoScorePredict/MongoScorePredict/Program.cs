@@ -13,6 +13,7 @@
  * 
  * */
 
+#define abcd
 
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ using System.Text;
 using MongoScorePredict.HistoryDataETL;
 using MongoScorePredict.LiveDataETL;
 using MongoScorePredict.AlgorithmModel;
+using MongoScorePredict.StagingETL;
 
 namespace MongoScorePredict
 {
@@ -28,15 +30,31 @@ namespace MongoScorePredict
     {
         static void Main(string[] args)
         {
+            int overday = 100;
+#if abc
             using (LiveDataETLs lcb = new LiveDataETLs())
-                lcb.CreateResultCollection();
+            {
+                lcb.CreateResultCollection(overday);
+                lcb.CreateLiveCollection();
+            }             
             GC.Collect();
             using (HistoryDataTopDetail lcbs = new HistoryDataTopDetail())
                 lcbs.CreateCollection();
             GC.Collect();
             using (HistoryDataCalculate lcbs = new HistoryDataCalculate())
                 lcbs.CreateCollection();
-            GC.Collect();
+            GC.Collect(); 
+
+            DataMingForMatlab.DataMingForMatlabs.CreateCollection();
+#endif
+            DataMingForMatlab.DataMingForMatlabs.Simulink();
+
+            StagingETLs sts = new StagingETLs();
+            sts.CreateLiveCollection();
+
+            ScorePredict sp = new ScorePredict();
+            sp.CreateLiveCollection();
+
             Console.ReadKey();
         }
     }

@@ -94,6 +94,7 @@ namespace MongoScorePredict.AlgorithmModel
     public class HistoryDataCalculateDocument
     {
         public long _id;//取当日比赛的id
+        public int live;//是否是即时数据
         public MatchModel match_prop;
         public ProbabilityModel host_probability;
         public ProbabilityModel away_probability;
@@ -369,6 +370,7 @@ namespace MongoScorePredict.AlgorithmModel
             {
                 HistoryDataCalculateDocument hdata = new HistoryDataCalculateDocument();
                 hdata._id = today_m._id;
+                hdata.live = today_m.live;
 
                 hdata.match_prop = new MatchModel();
                 hdata.match_prop.match_type = today_m.match_type;

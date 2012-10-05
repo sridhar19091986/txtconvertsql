@@ -17,5 +17,9 @@ namespace MongoScorePredict.MongoCurd
         public static string[] SimulinkMatchNow = new String[] { "SimulinkMatchNow", db, remote };
         public static string[] SimulinkRbf = new String[] { "SimulinkRbf", db, remote };
 
+        public static string[] StagingETLs = new String[] { "StagingETLs", db, remote };
+        public static string[] ScorePredict = new String[] { "ScorePredict", db, remote };
+        
+
     }
 }
