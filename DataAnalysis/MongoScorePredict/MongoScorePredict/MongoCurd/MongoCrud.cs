@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * 
+ * 几种增加库的方式，清空原来的数据，只在原来的数据上增加？
+ * 
+ * 
+ * */
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,20 +43,36 @@ namespace MongoScorePredict.MongoCurd
                         select p;
             return query;
         }
-        private MongoCollection mongocol = null;
-        public MongoCollection MongoCol
+        private MongoCollection mongoUpdateCol = null;
+        public MongoCollection MongoUpdateCol
         {
             get
             {
-                if (mongocol == null)
+                if (mongoUpdateCol == null)
                 {
-                    mongocol = GetMongoCollection(true);
+                    mongoUpdateCol = GetMongoCollection(false);
                 }
-                return mongocol;
+                return mongoUpdateCol;
             }
             set
             {
-                value = mongocol;
+                value = mongoUpdateCol;
+            }
+        }
+        private MongoCollection mongoDropColCreateCol = null;
+        public MongoCollection MongoDropColCreateCol
+        {
+            get
+            {
+                if (mongoDropColCreateCol == null)
+                {
+                    mongoDropColCreateCol = GetMongoCollection(true);
+                }
+                return mongoDropColCreateCol;
+            }
+            set
+            {
+                value = mongoDropColCreateCol;
             }
         }
         private List<T> mylistT = null;
@@ -83,5 +107,4 @@ namespace MongoScorePredict.MongoCurd
             return collection;
         }
     }
-   
 }

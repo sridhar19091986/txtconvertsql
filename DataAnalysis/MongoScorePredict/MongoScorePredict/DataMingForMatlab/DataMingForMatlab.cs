@@ -34,7 +34,7 @@ namespace MongoScorePredict.DataMingForMatlab
 {
     public class DataMingForMatlabs
     {
-        public static void CreateCollection()
+        public static void CreateSimCollection()
         {
             using (SimulinkMatchNow smm = new SimulinkMatchNow())
                 smm.CreateLiveCollection();
@@ -42,92 +42,50 @@ namespace MongoScorePredict.DataMingForMatlab
             using (SimulinkMatchOver smo = new SimulinkMatchOver())
                 smo.CreateLiveCollection();
             GC.Collect();
-            Console.WriteLine("CreateCollection->mongo->ok");
+            Console.WriteLine("CreateSimCollection->mongo->ok");
 
         }
-        public static void Simulink()
+        public static void DoSimulink()
         {
             SimulinkMatchNow smm = new SimulinkMatchNow();
             SimulinkMatchOver smo = new SimulinkMatchOver();
             SimulinkRbf simulinkrbf = new SimulinkRbf();
             int simulinkno = 0;
-            var lookup_now = smm.mongocrud.QueryMongo().Where(e=>e.Hmatch_count==20)
-                .Where(e=>e.Amatch_count==20)
-                .Where(e=>e.Jmatch_count>0).ToLookup(e => e.live);
-            var lookup_over = smo.mongocrud.QueryMongo().Where(e=>e.Hmatch_count==20)
-                .Where(e=>e.Amatch_count==20)
-                .Where(e=>e.Jmatch_count>0).ToLookup(e => e.live);
+            var lookup_now = smm.mongocrud.QueryMongo().Where(e => e.Hmatch_count == 20)
+                .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
+                .Where(e => e.Amatch_count == 20)
+                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0)
+                .Where(e => e.Jmatch_count > 0).ToLookup(e => e.live);
+            var lookup_over = smo.mongocrud.QueryMongo().Where(e => e.Hmatch_count == 20)
+          .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
+                .Where(e => e.Amatch_count == 20)
+                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0)
+                .Where(e => e.Jmatch_count > 0).ToLookup(e => e.live);
             foreach (var nowM in lookup_now)
             {
                 simulinkno++;
                 NNPredication nn = new NNPredication();
                 DataTable dt1 = nowM.ToDataTable();
-                string streamx=DataTable2Txt(dt1, nn.tempx);
+                string streamx = DataTableToTxt.DataTable2Txt(dt1, nn.tempx);
                 var overM = lookup_over[0];
                 if (!overM.Any()) continue;
                 DataTable dt2 = overM.ToDataTable();
-                string streamy= DataTable2Txt(dt2, nn.tempy);
-                //StreamReader streamx = new StreamReader(nn.tempx, System.Text.Encoding.Default);
-                //StreamReader streamy = new StreamReader(nn.tempy, System.Text.Encoding.Default);
+                string streamy = DataTableToTxt.DataTable2Txt(dt2, nn.tempy);
+
                 SimulinkRbfLog srlog = new SimulinkRbfLog();
                 srlog._id = simulinkno; Console.WriteLine(srlog._id);
                 //srlog.matchtype = nowM.Key;
                 srlog.matchover = streamy;  //y是训练用
                 srlog.matchnow = streamx;  //x是预测目标
-                srlog.matchnowColumn = getDataTableColumnName(dt1);
-                srlog.matchoverColumn = getDataTableColumnName(dt2);
+                srlog.matchnowColumn = DataTableToTxt.getDataTableColumnName(dt1);
+                srlog.matchoverColumn = DataTableToTxt.getDataTableColumnName(dt2);
                 srlog.matchid = nowM.Select(e => e._id.ToString()).ToList().Aggregate((a, b) => a + "\n" + b);
                 srlog.grnn = nn.NewGrnn();
                 srlog.pnn = nn.NewPnn();
-                simulinkrbf.mongocrud.MongoCol.Insert(srlog);
-                //streamx.Close();
-                //streamy.Close();
-            }
-            Console.WriteLine("Simulink->mongo->ok");
-        }
 
-        public static string getDataTableColumnName(DataTable dt1)
-        {
-            StringBuilder strBuilder = new StringBuilder();
-
-                for (int j = 0; j < dt1.Columns.Count; j++)
-                {
-                    strBuilder.Append(dt1.Columns[j].ColumnName + ' ');
-                }
-                return strBuilder.ToString(); 
-        }
-
-        public static string DataTable2Txt(DataTable dt1, string filename)
-        {
-            FileStream sr = File.Open(filename, FileMode.Create);
-            StreamWriter sw = new StreamWriter(sr, System.Text.Encoding.Default);
-            StringBuilder strBuilder = new StringBuilder();
-            StringBuilder sbuilder= new StringBuilder();
-            try
-            {
-                for (int i = 0; i < dt1.Rows.Count; i++)
-                {
-                    strBuilder = new StringBuilder();
-                    for (int j =0; j < dt1.Columns.Count; j++)
-                    {
-                        strBuilder.Append(dt1.Rows[i][j].ToString() + ' ');
-                    }
-                    strBuilder.Remove(strBuilder.Length - 1, 1);
-                    sw.WriteLine(strBuilder.ToString());
-                    sbuilder.AppendLine(strBuilder.ToString());
-                }
-              
+                simulinkrbf.mongocrud.MongoDropColCreateCol.Insert(srlog);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                sw.Close();
-                sr.Close();
-            }
-            return sbuilder.ToString();
+            Console.WriteLine("DoSimulink->mongo->ok");
         }
     }
 }

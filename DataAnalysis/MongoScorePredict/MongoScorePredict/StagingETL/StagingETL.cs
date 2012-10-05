@@ -22,7 +22,7 @@ namespace MongoScorePredict.StagingETL
         public int grnn_home_goals;
         public int grnn_away_goals;
     }
-    public class StagingETLs
+    public class StagingETLs : IDisposable
     {
         private string mongo_collection = CommonAttribute.StagingETLs[0];
         private string mongo_db = CommonAttribute.StagingETLs[1];
@@ -81,7 +81,7 @@ namespace MongoScorePredict.StagingETL
                     std.grnn_away_goals = int.Parse(grnn_vs[1]);
                     std.grnn_310values = int.Parse(grnn_vs[2]);
 
-                    mongo_StagingETLs.MongoCol.Insert(std);
+                    mongo_StagingETLs.MongoDropColCreateCol.Insert(std);
                 }
             }
             Console.WriteLine("StagingETLs->mongo->ok");

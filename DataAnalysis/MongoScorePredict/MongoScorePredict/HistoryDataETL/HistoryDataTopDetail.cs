@@ -153,7 +153,7 @@ namespace MongoScorePredict.HistoryDataETL
                 hdata.win_loss_big = ma.win_loss_big;
                 hdataHost.history_data_etl.Add(hdata);
             }
-            mongo_HistoryDataTopHostDocument.MongoCol.Insert(hdataHost);
+            mongo_HistoryDataTopHostDocument.MongoDropColCreateCol.Insert(hdataHost);
         }
         private void CreateAwayCollection(ILookup<string, result_tb_lib> lookup_matchType, LiveDataETLsDocument today_m)
         {
@@ -191,7 +191,7 @@ namespace MongoScorePredict.HistoryDataETL
                 hdata.win_loss_big = ma.win_loss_big;
                 hdataHost.history_data_etl.Add(hdata);
             }
-            mongo_HistoryDataTopAwayDocument.MongoCol.Insert(hdataHost);
+            mongo_HistoryDataTopAwayDocument.MongoDropColCreateCol.Insert(hdataHost);
         }
 
         private void CreateJzCollection(ILookup<string, result_tb_lib> lookup_matchType, LiveDataETLsDocument today_m)
@@ -231,7 +231,7 @@ namespace MongoScorePredict.HistoryDataETL
                 hdata.win_loss_big = ma.win_loss_big;
                 hdataHost.history_data_etl.Add(hdata);
             }
-            mongo_HistoryDataTopJzDocument.MongoCol.Insert(hdataHost);
+            mongo_HistoryDataTopJzDocument.MongoDropColCreateCol.Insert(hdataHost);
         }
     }
 }

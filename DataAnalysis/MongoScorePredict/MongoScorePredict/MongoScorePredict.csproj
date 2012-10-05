@@ -67,8 +67,10 @@
     <Compile Include="DataMingForMatlab\SimulinkMatchNow.cs" />
     <Compile Include="DataMingForMatlab\SimulinkMatchOver.cs" />
     <Compile Include="DataMingForMatlab\SimulinkRbf.cs" />
-    <Compile Include="DataMingForR\DataMingForR.cs" />
+    <Compile Include="DataMingForR\DataMingForRs.cs" />
     <Compile Include="AlgorithmModel\HistoryDataCalculate.cs" />
+    <Compile Include="Extensions\DataSetLinqExt.cs" />
+    <Compile Include="Extensions\DataTableToTxt.cs" />
     <Compile Include="Extensions\IEnumerableExt.cs" />
     <Compile Include="HistoryDataETL\HistoryDataTopDetail.cs" />
     <Compile Include="LiveDataETL\LiveDataETL.cs" />
@@ -83,12 +85,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StagingETL\ScorePredict.cs" />
+    <Compile Include="StagingETL\ScorePredictForCn.cs" />
     <Compile Include="StagingETL\StagingETL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AlgorithmModel\数据统计.htm" />
+    <Content Include="AlgorithmModel\赔率一览及赛事分析.htm" />
     <Content Include="AlgorithmModel\TextFile1.txt" />
     <Content Include="AlgorithmModel\TextFile2.txt" />
     <Content Include="AlgorithmModel\TextFile3.txt" />
+    <Content Include="AlgorithmModel\实力比较.png" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="MongoCurd\Model1.edmx">

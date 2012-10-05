@@ -19,6 +19,8 @@ namespace MongoScorePredict.MongoCurd
 
         public static string[] StagingETLs = new String[] { "StagingETLs", db, remote };
         public static string[] ScorePredict = new String[] { "ScorePredict", db, remote };
+
+        public static string[] ScorePredictForCn = new String[] { "ScorePredictForCn", db, remote };
         
 
     }
