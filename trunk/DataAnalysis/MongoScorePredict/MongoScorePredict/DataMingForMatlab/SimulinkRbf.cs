@@ -10,8 +10,11 @@ namespace MongoScorePredict.DataMingForMatlab
     {
         public long _id;
         public string matchtype;
+        public string matchoverColumn;
+        public string matchnowColumn;
         public string matchover;
         public string matchnow;
+        public string matchid;
         public string grnn;
         public string pnn;
     }

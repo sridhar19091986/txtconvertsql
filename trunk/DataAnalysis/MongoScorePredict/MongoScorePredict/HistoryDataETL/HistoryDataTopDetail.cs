@@ -18,6 +18,7 @@ namespace MongoScorePredict.HistoryDataETL
     public class HistoryDataETLs
     {
         public long _id;  //取比赛结果库的id
+        public int live;//是否是即时数据
         public int? html_position;
         public int? home_team_big;
         public int? away_team_big;

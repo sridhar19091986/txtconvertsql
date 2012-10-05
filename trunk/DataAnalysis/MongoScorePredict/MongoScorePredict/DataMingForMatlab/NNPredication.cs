@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RbfPredication;
+using MathWorks.MATLAB.NET.Arrays;
 
 namespace MongoScorePredict.DataMingForMatlab
 {
@@ -65,12 +67,7 @@ namespace MongoScorePredict.DataMingForMatlab
         {
             if (!disposed)
             {
-                if (disposing)
-                {
-                    // Free other state (managed objects).
-                }
-                // Free your own state (unmanaged objects).
-                // Set large fields to null.
+                if (disposing) { }
                 disposed = true;
             }
         }

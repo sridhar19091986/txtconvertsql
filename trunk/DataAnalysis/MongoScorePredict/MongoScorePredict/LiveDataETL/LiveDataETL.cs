@@ -27,6 +27,7 @@ namespace MongoScorePredict.LiveDataETL
     public class LiveDataETLsDocument
     {
         public long _id;  //public int live_table_lib_id;
+        public int live;//是否是即时数据
         public int? html_position;
         public int? home_team_big;
         public int? away_team_big;
@@ -80,11 +81,12 @@ namespace MongoScorePredict.LiveDataETL
             manalysis.ContextOptions.LazyLoadingEnabled = true;
             manalysis.live_Table_lib.MergeOption = MergeOption.NoTracking;
             DateTime dt_now = DateTime.Now.AddDays(-1);
-            var today_ma = manalysis.live_Table_lib.Where(e => e.match_time > dt_now);
+            var today_ma = manalysis.live_Table_lib.Where(e => e.match_time.Value > dt_now);
             foreach (var ma in today_ma)
             {
                 LiveDataETLsDocument ldata = new LiveDataETLsDocument();
                 ldata._id = ma.live_table_lib_id;
+                ldata.live = 1;
                 ldata.html_position = ma.html_position;
                 ldata.home_team_big = ma.home_team_big;
                 ldata.away_team_big = ma.away_team_big;
@@ -103,18 +105,19 @@ namespace MongoScorePredict.LiveDataETL
             }
             Console.WriteLine("LiveDataETLDocument->mongo->ok");
         }
-        public void CreateResultCollection()
+        public void CreateResultCollection(int overday)
         {
             MatchAnalysis manalysis = new MatchAnalysis();
             manalysis.CommandTimeout = 0;
             manalysis.ContextOptions.LazyLoadingEnabled = true;
             manalysis.live_Table_lib.MergeOption = MergeOption.NoTracking;
-            DateTime dt_now = DateTime.Now.AddDays(-6);
-            var result_ma = manalysis.result_tb_lib.Where(e => e.match_time > dt_now);
+            DateTime dt_now = DateTime.Now.AddDays(-1*overday);
+            var result_ma = manalysis.result_tb_lib.Where(e => e.match_time.Value > dt_now);
             foreach (var ma in result_ma)
             {
                 LiveDataETLsDocument ldata = new LiveDataETLsDocument();
                 ldata._id = ma.result_tb_lib_id;
+                ldata.live = 0;
                 ldata.html_position = ma.html_position;
                 ldata.home_team_big = ma.home_team_big;
                 ldata.away_team_big = ma.away_team_big;
