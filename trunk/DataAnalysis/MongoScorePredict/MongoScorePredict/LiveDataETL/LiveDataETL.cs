@@ -101,7 +101,9 @@ namespace MongoScorePredict.LiveDataETL
                 ldata.full_away_goals = ma.full_away_goals;
                 ldata.half_home_goals = ma.half_home_goals;
                 ldata.half_away_goals = ma.half_away_goals;
-                mongo_LiveDataETL.MongoCol.Insert(ldata);
+
+                mongo_LiveDataETL.MongoDropColCreateCol.Insert(ldata);
+
             }
             Console.WriteLine("LiveDataETLDocument->mongo->ok");
         }
@@ -132,7 +134,9 @@ namespace MongoScorePredict.LiveDataETL
                 ldata.full_away_goals = ma.full_away_goals;
                 ldata.half_home_goals = ma.half_home_goals;
                 ldata.half_away_goals = ma.half_away_goals;
-                mongo_LiveDataETL.MongoCol.Insert(ldata);
+
+                mongo_LiveDataETL.MongoDropColCreateCol.Insert(ldata);
+
             }
             Console.WriteLine("LiveDataETLDocument->mongo->ok");
         }

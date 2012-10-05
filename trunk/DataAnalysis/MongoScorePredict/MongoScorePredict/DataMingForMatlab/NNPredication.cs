@@ -10,8 +10,8 @@ namespace MongoScorePredict.DataMingForMatlab
     public class NNPredication : IDisposable
     {
         private RbfPredicationclass rbf = new RbfPredicationclass();
-        public string tempx = @"xite.sdf";
-        public string tempy = @"yn.sdf";
+        public string tempx = @"G:\txtconvertsql\DataAnalysis\RbfPredication\xite.sdf";
+        public string tempy = @"G:\txtconvertsql\DataAnalysis\RbfPredication\yn.sdf";
         public string NewPnn()
         {
             return NewPnn(tempx, tempy);

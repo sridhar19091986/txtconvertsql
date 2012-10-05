@@ -1,8 +1,19 @@
 ﻿/*
  * 
+ * 
  * 第3步，按照模型进行计算
  * 
  * 检查这个模型的正确性，怎么处理？
+ * 
+ * 数据维度的挖掘？
+ * 
+ * 例如赔率模型、统计模型
+ * 
+ * 增加半全场33，11，00，31，30，10。
+ * 
+ * 增加大小球2.5概率，这个在总进球数有包含。
+ * 
+ * 增加丢球概率，0，1，2，3+
  * 
  * 
  * */
@@ -23,20 +34,24 @@ namespace MongoScorePredict.AlgorithmModel
     public class ProbabilityModel
     {
         public int match_count;
+        public int host_count;
+        public int away_count;
 
         public int total_wins;  //总胜
         public int total_draws; //总平
         public int total_loss;   //总负   
+
         public int host_wins;//主胜
         public int host_draws;   //主平
         public int host_loss;   //主负
+
         public int away_wins;   //客胜
         public int away_draws;   //客平
         public int away_loss;  //客负
 
-        public int ht_total_wins;  //总胜
-        public int ht_total_draws; //总平
-        public int ht_total_loss;   //总负   
+        public int ht_total_wins;  //半场胜
+        public int ht_total_draws; //半场平
+        public int ht_total_loss;   //半场负   
 
         public int goals_win_2o; //"净胜2+" 
         public int goals_win_1;   //净胜1
@@ -138,6 +153,10 @@ namespace MongoScorePredict.AlgorithmModel
         {
             var host_probability = new ProbabilityModel();
 
+            host_probability.match_count = host.Count();
+            host_probability.host_count = host.Where(e => e.home_team_big == home_team_big).Count();
+            host_probability.away_count = host.Where(e => e.away_team_big == home_team_big).Count();
+
             host_probability.host_wins = host.Where(e => e.home_team_big == home_team_big).Where(e => e.full_home_goals - e.full_away_goals > 0).Count();
             host_probability.host_draws = host.Where(e => e.home_team_big == home_team_big).Where(e => e.full_home_goals - e.full_away_goals == 0).Count();
             host_probability.host_loss = host.Where(e => e.home_team_big == home_team_big).Where(e => e.full_home_goals - e.full_away_goals < 0).Count();
@@ -214,6 +233,11 @@ namespace MongoScorePredict.AlgorithmModel
         {
             var away_probability = new ProbabilityModel();
 
+
+            away_probability.match_count = host.Count();
+            away_probability.host_count = host.Where(e => e.home_team_big == away_team_big).Count();
+            away_probability.away_count = host.Where(e => e.away_team_big == away_team_big).Count();
+
             away_probability.host_wins = host.Where(e => e.home_team_big == away_team_big).Where(e => e.full_home_goals - e.full_away_goals > 0).Count();
             away_probability.host_draws = host.Where(e => e.home_team_big == away_team_big).Where(e => e.full_home_goals - e.full_away_goals == 0).Count();
             away_probability.host_loss = host.Where(e => e.home_team_big == away_team_big).Where(e => e.full_home_goals - e.full_away_goals < 0).Count();
@@ -288,6 +312,10 @@ namespace MongoScorePredict.AlgorithmModel
         public ProbabilityModel ConvertJz(List<HistoryDataETLs> host, int? home_team_big, int? away_team_big)
         {
             var jz_probability = new ProbabilityModel();
+
+            jz_probability.match_count = host.Count();
+            jz_probability.host_count = host.Where(e => e.home_team_big == home_team_big).Count();
+            jz_probability.away_count = host.Where(e => e.away_team_big == home_team_big).Count();
 
             jz_probability.host_wins = host.Where(e => e.home_team_big == home_team_big).Where(e => e.full_home_goals - e.full_away_goals > 0).Count();
             jz_probability.host_draws = host.Where(e => e.home_team_big == home_team_big).Where(e => e.full_home_goals - e.full_away_goals == 0).Count();
@@ -388,7 +416,6 @@ namespace MongoScorePredict.AlgorithmModel
                     .OrderByDescending(e => e.match_time)
                     .ToList();
                 hdata.host_probability = ConvertHost(host, today_m.home_team_big);
-                hdata.host_probability.match_count = host.Count();
 
                 var away = hdatatop.mongo_HistoryDataTopAwayDocument.QueryMongo()
                    .Where(e => e._id == today_m._id)
@@ -397,7 +424,7 @@ namespace MongoScorePredict.AlgorithmModel
                    .OrderByDescending(e => e.match_time)
                    .ToList();
                 hdata.away_probability = ConvertAway(away, today_m.away_team_big);
-                hdata.away_probability.match_count = away.Count();
+
 
                 var jz = hdatatop.mongo_HistoryDataTopJzDocument.QueryMongo()
                    .Where(e => e._id == today_m._id)
@@ -406,8 +433,6 @@ namespace MongoScorePredict.AlgorithmModel
                    .OrderByDescending(e => e.match_time)
                    .ToList();
                 hdata.jz_probability = ConvertJz(jz, today_m.home_team_big, today_m.away_team_big);
-                hdata.jz_probability.match_count = jz.Count();
-
 
 
                 hdata.result_score = new PredictModel();
@@ -421,7 +446,7 @@ namespace MongoScorePredict.AlgorithmModel
                 hdata.predict_score = new PredictModel();//这里还没有实现计算
 
 
-                mongo_HistoryDataCalculateDocument.MongoCol.Insert(hdata);
+                mongo_HistoryDataCalculateDocument.MongoDropColCreateCol.Insert(hdata);
 
             }
             Console.WriteLine("HistoryDataCalculateDocument->mongo->ok");

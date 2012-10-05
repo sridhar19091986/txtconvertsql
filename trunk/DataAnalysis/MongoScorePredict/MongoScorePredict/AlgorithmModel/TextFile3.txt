@@ -128,3 +128,15 @@ namespace MongoScorePredict.DataMingForMatlab
         }
     }
 }
+
+
+string str0 = i.ToString("f");   //25.00  
+
+2 string str1 = i.ToString("f1"); //25.0  
+
+3 string str2 = i.ToString("f2"); //25.00  
+
+4 string str3 = i.ToString("f3"); //25.000  
+
+5 string str4 = i.ToString("f4"); //25.0000 
+

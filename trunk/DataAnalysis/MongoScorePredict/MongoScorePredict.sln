@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScorePredictView", "ScorePr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataIntegrationService", "DataIntegrationService\DataIntegrationService.csproj", "{3F55CBD9-2E11-42D7-9CF1-304230EC02B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateScorePredict", "UpdateScorePredict\UpdateScorePredict.csproj", "{4BBA22E9-A93C-4366-9A17-B86A712BDB5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -25,6 +27,10 @@ Global
 		{3F55CBD9-2E11-42D7-9CF1-304230EC02B9}.Debug|x86.Build.0 = Debug|x86
 		{3F55CBD9-2E11-42D7-9CF1-304230EC02B9}.Release|x86.ActiveCfg = Release|x86
 		{3F55CBD9-2E11-42D7-9CF1-304230EC02B9}.Release|x86.Build.0 = Release|x86
+		{4BBA22E9-A93C-4366-9A17-B86A712BDB5D}.Debug|x86.ActiveCfg = Debug|x86
+		{4BBA22E9-A93C-4366-9A17-B86A712BDB5D}.Debug|x86.Build.0 = Debug|x86
+		{4BBA22E9-A93C-4366-9A17-B86A712BDB5D}.Release|x86.ActiveCfg = Release|x86
+		{4BBA22E9-A93C-4366-9A17-B86A712BDB5D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
