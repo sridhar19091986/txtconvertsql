@@ -57,12 +57,12 @@ namespace MongoScorePredict.DataMingForMatlab
         public double Htotal_goals_4t6;   //24"4-6球"
         public double Htotal_goals_7o;   //25.7球以上
 
-        public double Htotal_goals_single;  //26.单数
-        public double Htotal_goals_double; //27.双数
+        public double Htotal_goals_single { get; set; } //26.单数
+        public double Htotal_goals_double { get; set; } //27.双数
 
-        public int Hscore_recent_6;  //28.6轮积分;
-        public int Hscore_recent_5; //29.5轮积分;
-        public int Hscore_recent_4;   //30.4轮积分;
+        public int Hscore_recent_6 { get; set; } //28.6轮积分;
+        public int Hscore_recent_5 { get; set; }//29.5轮积分;
+        public int Hscore_recent_4 { get; set; }  //30.4轮积分;
         public int Hscore_recent_3;  //31.3轮积分;
         public int Hscore_recent_2;  //32.2轮积分;
         public int Hscore_recent_1;   //33.1轮积分  
@@ -103,12 +103,12 @@ namespace MongoScorePredict.DataMingForMatlab
         public double Atotal_goals_4t6;   //"4-6球"
         public double Atotal_goals_7o;   //7球以上
 
-        public double Atotal_goals_single;  //单数
-        public double Atotal_goals_double;  //双数
+        public double Atotal_goals_single { get; set; }  //单数
+        public double Atotal_goals_double { get; set; }  //双数
 
-        public int Ascore_recent_6;  //6轮积分;
-        public int Ascore_recent_5; //5轮积分;
-        public int Ascore_recent_4;  //4轮积分;
+        public int Ascore_recent_6 { get; set; } //6轮积分;
+        public int Ascore_recent_5 { get; set; } //5轮积分;
+        public int Ascore_recent_4 { get; set; }  //4轮积分;
         public int Ascore_recent_3;  //3轮积分;
         public int Ascore_recent_2;//2轮积分;
         public int Ascore_recent_1;   //1轮积分  
@@ -155,7 +155,7 @@ namespace MongoScorePredict.DataMingForMatlab
         public int Jscore_recent_6 { get; set; }   //6轮积分;
         public int Jscore_recent_5 { get; set; }  //5轮积分;
         public int Jscore_recent_4 { get; set; }   //4轮积分;
-        public int Jscore_recent_3 { get; set; }    //3轮积分;
+        public int Jscore_recent_3;    //3轮积分;
         public int Jscore_recent_2; //2轮积分;
         public int Jscore_recent_1;  //1轮积分  
 

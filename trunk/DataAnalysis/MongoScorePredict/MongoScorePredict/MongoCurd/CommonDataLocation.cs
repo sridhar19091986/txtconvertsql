@@ -10,8 +10,12 @@ namespace MongoScorePredict.MongoCurd
     class CommonDataLocation
     {
 
-        protected static string db = "MongoScorePredict";
+
+        protected static string db = "ScorePredictCn";
+
+
         protected static string remote = "mongodb://localhost/?safe=true";
+
         //protected static string sqlconn = "Data Source=localhost;Initial Catalog=TcpDbContext;Integrated Security=True;";
 
         //protected static string remote = "mongodb://192.168.4.249/?safe=true";
