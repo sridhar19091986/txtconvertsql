@@ -29,10 +29,15 @@
  * { "match_type" : { $in : [ "德甲", "西甲","英超"] } }
  * 
  * 
+ * 训练的时间长度和训练的比赛类型。pnn要求的样本数多。grnn则可以快速收敛，但是是局部值。
+ * 
+ * 
  * 
  * */
 
 #define abc
+
+#define abcd
 
 using System;
 using System.Collections.Generic;
@@ -45,6 +50,7 @@ using MongoScorePredict.StagingETL;
 using MongoScorePredict.DataMingForR;
 using MongoScorePredict.Extensions;
 using System.Data;
+using MongoScorePredict.EmailScorePredict;
 
 namespace MongoScorePredict
 {
@@ -54,52 +60,60 @@ namespace MongoScorePredict
         {
 
 #if abcd
-            int overday = 100;
+            int overday = 365 * 4;
 
             using (LiveDataETLs lcb = new LiveDataETLs())
             {
                 lcb.CreateResultCollection(overday);
                 lcb.CreateLiveCollection();
-            }             
+            }
             GC.Collect();
+#endif
+#if abcd
             using (HistoryDataTopDetail lcbs = new HistoryDataTopDetail())
                 lcbs.CreateCollection();
             GC.Collect();
 
             using (HistoryDataCalculate lcbs = new HistoryDataCalculate())
                 lcbs.CreateCollection();
-            GC.Collect(); 
-
-            DataMingForMatlab.DataMingForMatlabs.CreateSimCollection();
-#endif
-#if ab
-
-            DataMingForMatlab.DataMingForMatlabs.DoSimulink();
-
-            using (StagingETLs sts = new StagingETLs())
-                sts.CreateLiveCollection();
             GC.Collect();
 
+            DataMingForMatlab.DataMingForMatlabs.CreateSimCollection();
 
+             DataMingForMatlab.DataMingForMatlabs.DoSimulink();
+              using (StagingETLs sts = new StagingETLs())
+                sts.CreateLiveCollection();
+            GC.Collect();
+            
+#endif
+#if abc
             using (ScorePredict sp = new ScorePredict())
                 sp.CreateLiveCollection();
             GC.Collect();
-
             using (ScorePredictForCn sp = new ScorePredictForCn())
                 sp.CreateLiveCollection();
             GC.Collect();
 
-            
-
-            DataMingForRs.MatchNowToTxt();
-            DataMingForRs.MatchOverToTxt();
-
+            //预测结束
 #endif
+
+#if abc
+            //csv和email观察预测结果
+            string filename = @"ScorePredictForCn.csv";
             ScorePredictForCn smo = new ScorePredictForCn();
             var today_ma = smo.mongo_ScorePredictForCn.QueryMongo();
             DataTable dt1 = today_ma.CopyDataTable();
-            DataTableToTxt.DataTable2TxtAll(dt1, @"ScorePredictForCn.csv");
+            DataTableToTxt.DataTable2TxtAll(dt1, filename);
             Console.WriteLine("ScorePredictForCnToTxt->mongo->ok");
+
+            SendPredictEmail.SendMail(filename);
+#endif
+
+#if abc
+            //写入csv给R研究用
+            DataMingForRs.MatchNowToTxt();
+            DataMingForRs.MatchOverToTxt();
+#endif
 
             Console.ReadKey();
         }

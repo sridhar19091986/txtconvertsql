@@ -74,6 +74,7 @@
     <Compile Include="Extensions\IEnumerableExt.cs" />
     <Compile Include="HistoryDataETL\HistoryDataTopDetail.cs" />
     <Compile Include="LiveDataETL\LiveDataETL.cs" />
+    <Compile Include="LiveDataETL\LiveMatchETL.cs" />
     <Compile Include="MongoCurd\CommonAttribute.cs" />
     <Compile Include="MongoCurd\CommonDataLocation.cs" />
     <Compile Include="MongoCurd\Model1.Designer.cs">
@@ -84,6 +85,7 @@
     <Compile Include="MongoCurd\MongoCrud.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EmailScorePredict\SendPredictEmail.cs" />
     <Compile Include="StagingETL\ScorePredict.cs" />
     <Compile Include="StagingETL\ScorePredictForCn.cs" />
     <Compile Include="StagingETL\StagingETL.cs" />

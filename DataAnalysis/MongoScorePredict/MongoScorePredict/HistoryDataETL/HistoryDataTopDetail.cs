@@ -64,16 +64,18 @@ namespace MongoScorePredict.HistoryDataETL
         private string mongo_collection_host = CommonAttribute.HistoryDataTopDetail[0];
         private string mongo_collection_away = CommonAttribute.HistoryDataTopDetail[1];
         private string mongo_collection_jz = CommonAttribute.HistoryDataTopDetail[2];
-        private string mongo_db = CommonAttribute.HistoryDataTopDetail[3];
-        private string mongo_conn = CommonAttribute.HistoryDataTopDetail[4];
+        private string mongo_db1 = CommonAttribute.HistoryDataTopDetail[3];
+        private string mongo_db2 = CommonAttribute.HistoryDataTopDetail[4];
+        private string mongo_db3 = CommonAttribute.HistoryDataTopDetail[5];
+        private string mongo_conn = CommonAttribute.HistoryDataTopDetail[6];
         public MongoCrud<HistoryDataTopHostDocument> mongo_HistoryDataTopHostDocument;
         public MongoCrud<HistoryDataTopAwayDocument> mongo_HistoryDataTopAwayDocument;
         public MongoCrud<HistoryDataTopJzDocument> mongo_HistoryDataTopJzDocument;
         public HistoryDataTopDetail()
         {
-            mongo_HistoryDataTopHostDocument = new MongoCrud<HistoryDataTopHostDocument>(mongo_conn, mongo_db, mongo_collection_host);
-            mongo_HistoryDataTopAwayDocument = new MongoCrud<HistoryDataTopAwayDocument>(mongo_conn, mongo_db, mongo_collection_away);
-            mongo_HistoryDataTopJzDocument = new MongoCrud<HistoryDataTopJzDocument>(mongo_conn, mongo_db, mongo_collection_jz);
+            mongo_HistoryDataTopHostDocument = new MongoCrud<HistoryDataTopHostDocument>(mongo_conn, mongo_db1, mongo_collection_host);
+            mongo_HistoryDataTopAwayDocument = new MongoCrud<HistoryDataTopAwayDocument>(mongo_conn, mongo_db2, mongo_collection_away);
+            mongo_HistoryDataTopJzDocument = new MongoCrud<HistoryDataTopJzDocument>(mongo_conn, mongo_db3, mongo_collection_jz);
         }
         #region Implementing IDisposable and the Dispose Pattern Properly
         private bool disposed = false; // to detect redundant calls

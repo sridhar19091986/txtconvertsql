@@ -85,7 +85,7 @@ namespace MongoScorePredict.LiveDataETL
             foreach (var ma in today_ma)
             {
                 LiveDataETLsDocument ldata = new LiveDataETLsDocument();
-                ldata._id = ma.live_table_lib_id;
+                ldata._id = ma.live_table_lib_id*1000;
                 ldata.live = 1;
                 ldata.html_position = ma.html_position;
                 ldata.home_team_big = ma.home_team_big;
@@ -102,18 +102,20 @@ namespace MongoScorePredict.LiveDataETL
                 ldata.half_home_goals = ma.half_home_goals;
                 ldata.half_away_goals = ma.half_away_goals;
 
-                mongo_LiveDataETL.MongoDropColCreateCol.Insert(ldata);
+                if (LiveMatchETL.matches.Contains(ldata.match_type))
+                    mongo_LiveDataETL.MongoDropColCreateCol.Insert(ldata);
 
             }
-            Console.WriteLine("LiveDataETLDocument->mongo->ok");
+            Console.WriteLine("live_Table_lib->mongo->ok");
         }
+
         public void CreateResultCollection(int overday)
         {
             MatchAnalysis manalysis = new MatchAnalysis();
             manalysis.CommandTimeout = 0;
             manalysis.ContextOptions.LazyLoadingEnabled = true;
             manalysis.live_Table_lib.MergeOption = MergeOption.NoTracking;
-            DateTime dt_now = DateTime.Now.AddDays(-1*overday);
+            DateTime dt_now = DateTime.Now.AddDays(-1 * overday);
             var result_ma = manalysis.result_tb_lib.Where(e => e.match_time.Value > dt_now);
             foreach (var ma in result_ma)
             {
@@ -135,10 +137,11 @@ namespace MongoScorePredict.LiveDataETL
                 ldata.half_home_goals = ma.half_home_goals;
                 ldata.half_away_goals = ma.half_away_goals;
 
-                mongo_LiveDataETL.MongoDropColCreateCol.Insert(ldata);
+                if (LiveMatchETL.matches.Contains(ldata.match_type))
+                    mongo_LiveDataETL.MongoDropColCreateCol.Insert(ldata);
 
             }
-            Console.WriteLine("LiveDataETLDocument->mongo->ok");
+            Console.WriteLine("result_tb_lib->mongo->ok");
         }
     }
 }

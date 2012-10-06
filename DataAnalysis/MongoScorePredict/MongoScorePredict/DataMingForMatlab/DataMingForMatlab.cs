@@ -51,30 +51,27 @@ namespace MongoScorePredict.DataMingForMatlab
             SimulinkMatchOver smo = new SimulinkMatchOver();
             SimulinkRbf simulinkrbf = new SimulinkRbf();
             int simulinkno = 0;
-            var lookup_now = smm.mongocrud.QueryMongo().Where(e => e.Hmatch_count == 20)
+            var lookup_now = smm.mongocrud.QueryMongo()
                 .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
-                .Where(e => e.Amatch_count == 20)
-                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0)
-                .Where(e => e.Jmatch_count > 0).ToLookup(e => e.live);
-            var lookup_over = smo.mongocrud.QueryMongo().Where(e => e.Hmatch_count == 20)
-          .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
-                .Where(e => e.Amatch_count == 20)
-                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0)
-                .Where(e => e.Jmatch_count > 0).ToLookup(e => e.live);
+                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0).ToLookup(e => e.match_type);
+            var lookup_over = smo.mongocrud.QueryMongo()
+                .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
+                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0).ToLookup(e => e.match_type);
             foreach (var nowM in lookup_now)
             {
                 simulinkno++;
+
                 NNPredication nn = new NNPredication();
                 DataTable dt1 = nowM.ToDataTable();
                 string streamx = DataTableToTxt.DataTable2Txt(dt1, nn.tempx);
-                var overM = lookup_over[0];
-                if (!overM.Any()) continue;
+                var overM = lookup_over[nowM.Key];
+
                 DataTable dt2 = overM.ToDataTable();
                 string streamy = DataTableToTxt.DataTable2Txt(dt2, nn.tempy);
 
                 SimulinkRbfLog srlog = new SimulinkRbfLog();
                 srlog._id = simulinkno; Console.WriteLine(srlog._id);
-                //srlog.matchtype = nowM.Key;
+                srlog.matchtype = nowM.Key;
                 srlog.matchover = streamy;  //y是训练用
                 srlog.matchnow = streamx;  //x是预测目标
                 srlog.matchnowColumn = DataTableToTxt.getDataTableColumnName(dt1);

@@ -22,30 +22,26 @@ namespace MongoScorePredict.DataMingForR
         public static void MatchOverToTxt()
         {
             SimulinkMatchOver smo = new SimulinkMatchOver();
-            var lookup_over = smo.mongocrud.QueryMongo().Where(e => e.Hmatch_count == 20)
-             .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
-             .Where(e => e.Amatch_count == 20)
-             .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0)
-             .Where(e => e.Jmatch_count > 0).ToLookup(e => e.live);
+            var lookup_over = smo.mongocrud.QueryMongo()
+            .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
+                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0).ToLookup(e => e.match_type);
             foreach (var overM in lookup_over)
             {
                 DataTable dt1 = overM.CopyDataTable();
-                DataTableToTxt.DataTable2TxtAll(dt1, @"over.csv");
+                DataTableToTxt.DataTable2TxtAll(dt1, @"data\" + overM.Key + "over.csv");
             }
             Console.WriteLine("MatchOverToTxt->mongo->ok");
         }
         public static void MatchNowToTxt()
         {
             SimulinkMatchNow smm = new SimulinkMatchNow();
-            var lookup_now = smm.mongocrud.QueryMongo().Where(e => e.Hmatch_count == 20)
+            var lookup_now = smm.mongocrud.QueryMongo()
                 .Where(e => e.Haway_count > 0).Where(e => e.Hhost_count > 0)
-                .Where(e => e.Amatch_count == 20)
-                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0)
-                .Where(e => e.Jmatch_count > 0).ToLookup(e => e.live);
+                .Where(e => e.Ahost_count > 0).Where(e => e.Aaway_count > 0).ToLookup(e => e.match_type);
             foreach (var nowM in lookup_now)
             {
                 DataTable dt1 = nowM.CopyDataTable();
-                DataTableToTxt.DataTable2TxtAll(dt1, @"now.csv");
+                DataTableToTxt.DataTable2TxtAll(dt1, @"data\" + nowM.Key + "now.csv");
             }
             Console.WriteLine("MatchNowToTxt->mongo->ok");
         }
